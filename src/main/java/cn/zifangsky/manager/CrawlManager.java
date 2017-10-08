@@ -9,6 +9,12 @@ public interface CrawlManager {
 	public void weatherCrawl(String stationCode);
 	
 	/**
+	 * 房屋爬虫
+	 * @param station 城区
+	 */
+	public void houseCrawl(String station);
+	
+	/**
 	 * 代理IP爬虫，地址：http://www.xicidaili.com
 	 */
 	public void proxyIPCrawl();
