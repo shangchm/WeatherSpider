@@ -57,9 +57,9 @@ public class CrawlManagerImpl implements CrawlManager {
 		System.out.println("proxyList+++++++"+ipList);
 		SimpleProxyProvider proxyProvider = SimpleProxyProvider.from(ipList);  
 		httpClientDownloader.setProxyProvider(proxyProvider);
-		OOSpider.create(new LianJiaSpider()).setDownloader(httpClientDownloader)
+		OOSpider.create(new LianJiaSpider())
+		//.setDownloader(httpClientDownloader)
 		//--------使用代理池--end-------
-		//OOSpider.create(new LianJiaSpider())
 		.addUrl("https://tj.lianjia.com/ershoufang/" + station+"/pg1")
 		.thread(1)
 		.run();
@@ -67,7 +67,20 @@ public class CrawlManagerImpl implements CrawlManager {
 
 	@Override
 	public void proxyIPCrawl() {
+		HttpClientDownloader httpClientDownloader = new HttpClientDownloader(); 
+		List<ProxyIp> ips = proxyIpManager.selectAll();
+		Proxy[] ipList = new Proxy[ips.size()];
+		for (int i =0;i<ips.size();i++) {
+			ProxyIp proxyIp = ips.get(i);
+			if(proxyIp.getType().equals("HTTP")){
+				ipList[i] = new Proxy(proxyIp.getIp(),proxyIp.getPort());
+			}
+		}
+		SimpleProxyProvider proxyProvider = SimpleProxyProvider.from(ipList);  
+		httpClientDownloader.setProxyProvider(proxyProvider);
+		
 		OOSpider.create(new ProxyIPSpider())
+		.setDownloader(httpClientDownloader)
 		.addUrl("http://www.xicidaili.com/nn/1").addPipeline(proxyIPPipeline)
 		.thread(3)
 		.run();
@@ -75,8 +88,22 @@ public class CrawlManagerImpl implements CrawlManager {
 
 	@Override
 	public void proxyIPCrawl2() {
+		HttpClientDownloader httpClientDownloader = new HttpClientDownloader(); 
+		List<ProxyIp> ips = proxyIpManager.selectAll();
+		Proxy[] ipList = new Proxy[ips.size()];
+		for (int i =0;i<ips.size();i++) {
+			ProxyIp proxyIp = ips.get(i);
+			if(proxyIp.getType().equals("HTTP")){
+				ipList[i] = new Proxy(proxyIp.getIp(),proxyIp.getPort());
+			}
+		}
+		SimpleProxyProvider proxyProvider = SimpleProxyProvider.from(ipList);  
+		httpClientDownloader.setProxyProvider(proxyProvider);
+		
 		OOSpider.create(new ProxyIPSpider2())
-		.addUrl("http://www.kuaidaili.com/free/inha/1/").addPipeline(proxyIPPipeline)
+		.setDownloader(httpClientDownloader)
+		.addUrl("http://www.kuaidaili.com/free/inha/1/")
+		.addPipeline(proxyIPPipeline)
 		.thread(2)
 		.run();
 	}
