@@ -42,7 +42,7 @@ public class ProxyIPSpider implements PageProcessor {
 		}
 		page.putField("result", result);
 		page.addTargetRequest("http://www.xicidaili.com/nn/2");
-		page.addTargetRequest("http://www.xicidaili.com/nt/");
+		page.addTargetRequest("http://www.xicidaili.com/nn/3");
 	}
 
 }

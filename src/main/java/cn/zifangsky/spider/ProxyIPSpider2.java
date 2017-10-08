@@ -18,6 +18,7 @@ public class ProxyIPSpider2 implements PageProcessor {
 		Site site = Site.me().setTimeOut(6000).setRetryTimes(3)
 				.setSleepTime(1000).setCharset("UTF-8").addHeader("Accept-Encoding", "/")
 				.setUserAgent(UserAgentUtils.radomUserAgent());
+		        
 		
 		return site;
 	}
@@ -50,7 +51,8 @@ public class ProxyIPSpider2 implements PageProcessor {
 		}
 		page.putField("result", result);
 		page.addTargetRequest("http://www.kuaidaili.com/free/inha/2/");
-		page.addTargetRequest("http://www.kuaidaili.com/free/intr/1/");
+		page.addTargetRequest("http://www.kuaidaili.com/free/inha/3/");
+		page.addTargetRequest("http://www.kuaidaili.com/free/inha/4/");
 	}
 
 }
