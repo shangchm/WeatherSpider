@@ -23,7 +23,14 @@ public class LianJiaSpider implements PageProcessor {
 	private Site site = Site.me().setTimeOut(20000).setRetryTimes(3)
 			.setSleepTime(2000).setCharset("UTF-8");
 	
-	private static String URI= "https://tj.lianjia.com";
+	private  String URI;
+	
+	private  String CSDM;
+	
+	public LianJiaSpider(String csdm){
+		CSDM = csdm;
+		URI = "https://"+CSDM+".lianjia.com";
+	}
 	
 	@Override
 	public Site getSite() {
@@ -158,7 +165,7 @@ public class LianJiaSpider implements PageProcessor {
             fw.setDanjia(Integer.parseInt(danjia));
             fw.setZongjia(Integer.parseInt(zongjia));
             fw.setXiaoqumc(xiaoqumc);
-            fw.setSuozaics("TJ");
+            fw.setSuozaics(CSDM);
             fw.setSuozaiq(suozaiq);
             fw.setSuozaisq(suozaisq);
             fw.setSuozaidtxl(suozaidtxl);
