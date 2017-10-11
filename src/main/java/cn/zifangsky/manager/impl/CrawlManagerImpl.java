@@ -11,6 +11,7 @@ import cn.zifangsky.manager.ProxyIpManager;
 import cn.zifangsky.model.ProxyIp;
 import cn.zifangsky.spider.CustomPipeline;
 import cn.zifangsky.spider.LianJiaSpider;
+import cn.zifangsky.spider.LianjianPipeline;
 import cn.zifangsky.spider.ProxyIPPipeline;
 import cn.zifangsky.spider.ProxyIPSpider;
 import cn.zifangsky.spider.ProxyIPSpider2;
@@ -31,6 +32,9 @@ public class CrawlManagerImpl implements CrawlManager {
 	
 	@Resource(name="proxyIpManager")
 	private ProxyIpManager proxyIpManager;
+	
+	@Resource(name="lianjiaPipeline")
+	private LianjianPipeline lianjianPipeline;
 	
 	@Override
 	public void weatherCrawl(String stationCode) {
@@ -54,13 +58,13 @@ public class CrawlManagerImpl implements CrawlManager {
 				ipList[i] = new Proxy(proxyIp.getIp(),proxyIp.getPort());
 			}
 		}
-		System.out.println("proxyList+++++++"+ipList);
 		SimpleProxyProvider proxyProvider = SimpleProxyProvider.from(ipList);  
 		httpClientDownloader.setProxyProvider(proxyProvider);
 		OOSpider.create(new LianJiaSpider())
 		//.setDownloader(httpClientDownloader)
 		//--------使用代理池--end-------
 		.addUrl("https://tj.lianjia.com/ershoufang/" + station+"/pg1")
+		.addPipeline(lianjianPipeline)
 		.thread(1)
 		.run();
 	}
