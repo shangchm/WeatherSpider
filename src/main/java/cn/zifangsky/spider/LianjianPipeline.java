@@ -15,12 +15,13 @@ import us.codecraft.webmagic.pipeline.Pipeline;
  * @author zifangsky
  *
  */
-@Component("lianjiaPipeline")
+@Component("lianjianPipeline")
 public class LianjianPipeline implements Pipeline {
 	
 	
 	@Resource(name="erShouFangManager")
 	private ErShouFangManager erShouFangManager;
+	
 	
 	/**
 	 * 保存数据
@@ -39,4 +40,6 @@ public class LianjianPipeline implements Pipeline {
 			}
 		}
 	}
+	
+	
 }

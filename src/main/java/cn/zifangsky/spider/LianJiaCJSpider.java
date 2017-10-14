@@ -1,6 +1,7 @@
 package cn.zifangsky.spider;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -183,8 +184,9 @@ public class LianJiaCJSpider implements PageProcessor {
            
             
             fw.setFangwubh(fangwubh);
-            fw.setDanjia(Integer.parseInt(zongjia)*10000/Integer.parseInt(jianzhumj.replaceAll("㎡", "")));
-            fw.setZongjia(Integer.parseInt(zongjia));
+            if(zongjia!=null&&!"暂无数据".equals(zongjia))
+            fw.setZongjia(Integer.parseInt(zongjia.trim()));
+            fw.setDanjia((int)Math.round(fw.getZongjia()*10000/Double.parseDouble(jianzhumj.trim().replaceAll("㎡", ""))));
             fw.setXiaoqumc(xiaoqumc);
             fw.setSuozaics(CSDM);
             fw.setSuozaiq(suozaiq);
@@ -197,11 +199,13 @@ public class LianJiaCJSpider implements PageProcessor {
             //基本信息
             fw.setFangwuhx(fangwuhx);
             fw.setSuozailc(suozailc);
-            if(jianzhumj!=null&&!"暂无数据".equals(jianzhumj))
-            fw.setJianzhumj(new BigDecimal(jianzhumj.replaceAll("㎡", "")));
+            if(jianzhumj!=null&&!"暂无数据".equals(jianzhumj.trim()))
+            fw.setJianzhumj(new BigDecimal(jianzhumj.trim().replaceAll("㎡", "")));
             fw.setHuxingjg(huxingjg);
-            if(taoneimj!=null&&!"暂无数据".equals(taoneimj))
-            fw.setTaoneimj(new BigDecimal(taoneimj.replaceAll("㎡", "")));
+            if(taoneimj!=null&&!"暂无数据".equals(taoneimj.trim())){
+            	System.out.println("taoneimj:"+taoneimj);
+            fw.setTaoneimj(new BigDecimal(taoneimj.trim().replaceAll("㎡", "")));
+            }
             fw.setJianzhulx(jianzhulx);
             fw.setFangwucx(fangwucx);
             fw.setJianzhujg(jianzhujg);
@@ -212,10 +216,10 @@ public class LianJiaCJSpider implements PageProcessor {
             fw.setChanquannx(chanquannx);
             //交易信息
             if(guapaisj!=null)
-            fw.setGuapaisj(guapaisj.replaceAll("-", ""));
+            fw.setGuapaisj(guapaisj.trim().replaceAll("-", ""));
             fw.setJiaoyiqs(jiaoyiqs);
             if(shangcijy!=null)
-            fw.setShangcijy(shangcijy.replaceAll("-", ""));
+            fw.setShangcijy(shangcijy.trim().replaceAll("-", ""));
             fw.setFangwuyt(fangwuyt);
             fw.setFangwunx(fangwunx);
             fw.setChanquanss(chanquanss);
@@ -275,7 +279,7 @@ public class LianJiaCJSpider implements PageProcessor {
 	        String chengjiaosj = "2017.09.27 链家成交";
 	        chengjiaosj = chengjiaosj.split(" ")[0];
 	        chengjiaosj = chengjiaosj.replaceAll("\\.", "");
-	        System.out.println(1000/3);
+	        System.out.println( Math.round((Integer.parseInt("100")*10000)/Double.parseDouble("33.3")));
 	}
 	
 }

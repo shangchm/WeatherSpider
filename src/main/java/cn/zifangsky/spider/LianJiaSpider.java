@@ -203,6 +203,7 @@ public class LianJiaSpider implements PageProcessor {
             SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
             fw.setCaozuosj(format.format(new Date(System.currentTimeMillis())));
             fw.setLianjiedz(url);
+            fw.setShifoucj("0");
             
             
             page.putField("fangwuxx", fw);  //后面做数据的持久化

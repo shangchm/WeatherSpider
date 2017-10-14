@@ -15,7 +15,7 @@ import us.codecraft.webmagic.pipeline.Pipeline;
  * @author zifangsky
  *
  */
-@Component("lianjiaPipeline")
+@Component("lianjianCJPipeline")
 public class LianjianCJPipeline implements Pipeline {
 	
 	
@@ -28,14 +28,14 @@ public class LianjianCJPipeline implements Pipeline {
 	@Override
 	public void process(ResultItems resultItems, Task task) {
 		LianjiaFangwuxx fangwuxx = resultItems.get("fangwuxx");
-		if (fangwuxx != null) {
+		LianjiaFangwuxx CJfangwuxx = resultItems.get("CJfangwuxx");
+		if (fangwuxx != null&&CJfangwuxx!=null) {
 			LianjiaFangwuxx oldfangwuxx = erShouFangManager.selectByPrimaryKey(fangwuxx.getFangwubh());
 
 			if (oldfangwuxx == null) {
 				erShouFangManager.insertSelective(fangwuxx);
 			} else {
-				fangwuxx.setFangwubh(oldfangwuxx.getFangwubh());
-				erShouFangManager.updateByPrimaryKeySelective(fangwuxx);
+				erShouFangManager.updateByPrimaryKeySelective(CJfangwuxx);
 			}
 		}
 	}
