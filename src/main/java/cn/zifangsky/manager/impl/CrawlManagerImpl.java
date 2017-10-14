@@ -67,7 +67,7 @@ public class CrawlManagerImpl implements CrawlManager {
 		SimpleProxyProvider proxyProvider = SimpleProxyProvider.from(ipList);  
 		httpClientDownloader.setProxyProvider(proxyProvider);
 		OOSpider.create(new LianJiaSpider(csdm))
-		//.setDownloader(httpClientDownloader)
+		.setDownloader(httpClientDownloader)
 		//--------使用代理池--end-------
 		.addUrl("https://"+csdm+".lianjia.com/ershoufang/"+qydm+"/pg1")
 		.addPipeline(lianjianPipeline)
@@ -91,7 +91,7 @@ public class CrawlManagerImpl implements CrawlManager {
 		SimpleProxyProvider proxyProvider = SimpleProxyProvider.from(ipList);  
 		httpClientDownloader.setProxyProvider(proxyProvider);
 		OOSpider.create(new LianJiaCJSpider(csdm))
-		//.setDownloader(httpClientDownloader)
+		.setDownloader(httpClientDownloader)
 		//--------使用代理池--end-------
 		.addUrl("https://"+csdm+".lianjia.com/chengjiao/"+qydm+"/pg1")
 		.addPipeline(lianjianCJPipeline)
