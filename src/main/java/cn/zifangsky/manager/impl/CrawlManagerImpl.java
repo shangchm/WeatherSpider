@@ -10,7 +10,9 @@ import cn.zifangsky.manager.CrawlManager;
 import cn.zifangsky.manager.ProxyIpManager;
 import cn.zifangsky.model.ProxyIp;
 import cn.zifangsky.spider.CustomPipeline;
+import cn.zifangsky.spider.LianJiaCJSpider;
 import cn.zifangsky.spider.LianJiaSpider;
+import cn.zifangsky.spider.LianjianCJPipeline;
 import cn.zifangsky.spider.LianjianPipeline;
 import cn.zifangsky.spider.ProxyIPPipeline;
 import cn.zifangsky.spider.ProxyIPSpider;
@@ -33,8 +35,13 @@ public class CrawlManagerImpl implements CrawlManager {
 	@Resource(name="proxyIpManager")
 	private ProxyIpManager proxyIpManager;
 	
-	@Resource(name="lianjiaPipeline")
+	@Resource(name="lianjianPipeline")
 	private LianjianPipeline lianjianPipeline;
+	
+	@Resource(name="lianjianCJPipeline")
+	private LianjianCJPipeline lianjianCJPipeline;
+	
+
 	
 	@Override
 	public void weatherCrawl(String stationCode) {
@@ -45,9 +52,8 @@ public class CrawlManagerImpl implements CrawlManager {
 		.run();
 	}
 	
-	
 	@Override
-	public void houseCrawl(String station) {
+	public void houseCrawl(String csdm,String qydm) {
 		//--------使用代理池--start-------
         HttpClientDownloader httpClientDownloader = new HttpClientDownloader(); 
 		List<ProxyIp> ips = proxyIpManager.selectAll();
@@ -60,11 +66,35 @@ public class CrawlManagerImpl implements CrawlManager {
 		}
 		SimpleProxyProvider proxyProvider = SimpleProxyProvider.from(ipList);  
 		httpClientDownloader.setProxyProvider(proxyProvider);
-		OOSpider.create(new LianJiaSpider())
+		OOSpider.create(new LianJiaSpider(csdm))
 		//.setDownloader(httpClientDownloader)
 		//--------使用代理池--end-------
-		.addUrl("https://tj.lianjia.com/ershoufang/" + station+"/pg1")
+		.addUrl("https://"+csdm+".lianjia.com/ershoufang/"+qydm+"/pg1")
 		.addPipeline(lianjianPipeline)
+		.thread(1)
+		.run();
+	}
+	
+	
+	@Override
+	public void houseCrawlCJ(String csdm,String qydm) {
+		//--------使用代理池--start-------
+        HttpClientDownloader httpClientDownloader = new HttpClientDownloader(); 
+		List<ProxyIp> ips = proxyIpManager.selectAll();
+		Proxy[] ipList = new Proxy[ips.size()];
+		for (int i =0;i<ips.size();i++) {
+			ProxyIp proxyIp = ips.get(i);
+			if(proxyIp.getType().equals("HTTPS")){
+				ipList[i] = new Proxy(proxyIp.getIp(),proxyIp.getPort());
+			}
+		}
+		SimpleProxyProvider proxyProvider = SimpleProxyProvider.from(ipList);  
+		httpClientDownloader.setProxyProvider(proxyProvider);
+		OOSpider.create(new LianJiaCJSpider(csdm))
+		//.setDownloader(httpClientDownloader)
+		//--------使用代理池--end-------
+		.addUrl("https://"+csdm+".lianjia.com/chengjiao/"+qydm+"/pg1")
+		//.addPipeline(lianjianCJPipeline)
 		.thread(1)
 		.run();
 	}
@@ -111,6 +141,7 @@ public class CrawlManagerImpl implements CrawlManager {
 		.thread(2)
 		.run();
 	}
+
 
 	
 
