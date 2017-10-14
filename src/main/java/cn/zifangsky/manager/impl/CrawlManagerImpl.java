@@ -94,7 +94,7 @@ public class CrawlManagerImpl implements CrawlManager {
 		//.setDownloader(httpClientDownloader)
 		//--------使用代理池--end-------
 		.addUrl("https://"+csdm+".lianjia.com/chengjiao/"+qydm+"/pg1")
-		//.addPipeline(lianjianCJPipeline)
+		.addPipeline(lianjianCJPipeline)
 		.thread(1)
 		.run();
 	}

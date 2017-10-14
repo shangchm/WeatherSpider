@@ -21,7 +21,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 public class LianJiaSpider implements PageProcessor {
 	
 	private Site site = Site.me().setTimeOut(20000).setRetryTimes(3)
-			.setSleepTime(2000).setCharset("UTF-8");
+			.setSleepTime(8000).setCharset("UTF-8");
 	
 	private  String URI;
 	
