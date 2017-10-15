@@ -79,6 +79,8 @@ public class LianjiaFangwuxx {
 
     private String caozuosj;
 
+    private String shifouxz;
+
     public String getFangwubh() {
         return fangwubh;
     }
@@ -381,5 +383,13 @@ public class LianjiaFangwuxx {
 
     public void setCaozuosj(String caozuosj) {
         this.caozuosj = caozuosj == null ? null : caozuosj.trim();
+    }
+
+    public String getShifouxz() {
+        return shifouxz;
+    }
+
+    public void setShifouxz(String shifouxz) {
+        this.shifouxz = shifouxz == null ? null : shifouxz.trim();
     }
 }

@@ -28,14 +28,16 @@ public class LianjianCJPipeline implements Pipeline {
 	@Override
 	public void process(ResultItems resultItems, Task task) {
 		LianjiaFangwuxx fangwuxx = resultItems.get("fangwuxx");
-		LianjiaFangwuxx CJfangwuxx = resultItems.get("CJfangwuxx");
-		if (fangwuxx != null&&CJfangwuxx!=null) {
+		LianjiaFangwuxx updateFangwuxx = resultItems.get("updateFangwuxx");
+		if (fangwuxx != null&&updateFangwuxx!=null) {
 			LianjiaFangwuxx oldfangwuxx = erShouFangManager.selectByPrimaryKey(fangwuxx.getFangwubh());
 
 			if (oldfangwuxx == null) {
+				fangwuxx.setShifouxz("1");
 				erShouFangManager.insertSelective(fangwuxx);
 			} else {
-				erShouFangManager.updateByPrimaryKeySelective(CJfangwuxx);
+				fangwuxx.setShifouxz("0");
+				erShouFangManager.updateByPrimaryKeySelective(updateFangwuxx);
 			}
 		}
 	}

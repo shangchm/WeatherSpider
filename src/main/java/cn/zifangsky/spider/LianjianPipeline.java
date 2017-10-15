@@ -33,9 +33,11 @@ public class LianjianPipeline implements Pipeline {
 			LianjiaFangwuxx oldfangwuxx = erShouFangManager.selectByPrimaryKey(fangwuxx.getFangwubh());
 
 			if (oldfangwuxx == null) {
+				fangwuxx.setShifouxz("1");
 				erShouFangManager.insertSelective(fangwuxx);
 			} else {
 				fangwuxx.setFangwubh(oldfangwuxx.getFangwubh());
+				fangwuxx.setShifouxz("0");
 				erShouFangManager.updateByPrimaryKeySelective(fangwuxx);
 			}
 		}
