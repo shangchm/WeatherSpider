@@ -229,9 +229,9 @@ public class LianJiaCJSpider implements PageProcessor {
             //成交信息
             fw.setShifoucj("1");
             if(chenjiaojj!=null)
-            fw.setChengjiaodj(Integer.parseInt(chenjiaojj));
+            fw.setChengjiaodj((int)Math.round(Double.parseDouble(chenjiaojj)));
             if(chenjiaozj!=null)
-            fw.setChengjiaozj(Integer.parseInt(chenjiaozj));
+            fw.setChengjiaozj((int)Math.round(Double.parseDouble(chenjiaozj)));
             fw.setChengjiaosj(chengjiaosj);
             if(chenjiaozq!=null)
             fw.setChengjiaozq(Integer.parseInt(chenjiaozq));

@@ -34,9 +34,11 @@ public class LianjianCJPipeline implements Pipeline {
 
 			if (oldfangwuxx == null) {
 				fangwuxx.setShifouxz("1");
+				System.out.println("新增记录成功："+fangwuxx.getLianjiedz());
 				erShouFangManager.insertSelective(fangwuxx);
 			} else {
-				fangwuxx.setShifouxz("0");
+				updateFangwuxx.setShifouxz("0");
+				System.out.println("更新记录成功："+fangwuxx.getLianjiedz());
 				erShouFangManager.updateByPrimaryKeySelective(updateFangwuxx);
 			}
 		}

@@ -90,7 +90,7 @@ public class LianJiaSpider implements PageProcessor {
             	 page.addTargetRequests(listUrls);
             } 
         }else if(matcher3.find()){  //房屋页面   
-        	
+        	LianjiaFangwuxx fw = new LianjiaFangwuxx();
         	//编号
         	String fangwubh = page.getHtml().xpath("//div[@class='houseRecord']/span[@class='info']/text()").toString();
         	//单价
@@ -109,33 +109,105 @@ public class LianJiaSpider implements PageProcessor {
             String kaifangcs = page.getHtml().xpath("//span[@id=favCount]/text()").toString();
             //预约次数--
             String yueyuecs = page.getHtml().xpath("//span[@id=cartCount]/text()").toString();
+            
+            fw.setFangwubh(fangwubh);
+            fw.setDanjia(Integer.parseInt(danjia));
+            fw.setZongjia(Integer.parseInt(zongjia));
+            fw.setXiaoqumc(xiaoqumc);
+            fw.setSuozaics(CSDM);
+            fw.setSuozaiq(suozaiq);
+            fw.setSuozaisq(suozaisq);
+            fw.setSuozaidtxl(suozaidtxl);
+            if(kaifangcs!=null)
+            fw.setKanfangcs(Integer.parseInt(kaifangcs));
+            if(yueyuecs!=null)
+            fw.setYuyuecs(Integer.parseInt(yueyuecs));
             //---------------------------------------基本信息-------base-----------------------------------------
-            //房屋户型
-            String fangwuhx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[1]/text()").toString();
-            //所在楼层
-            String suozailc = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[2]/text()").toString();
-            //建筑面积
-            String jianzhumj = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[3]/text()").toString();
-            //户型结构
-            String huxingjg = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[4]/text()").toString();
-            //套内面积
-            String taoneimj = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[5]/text()").toString();
-            //建筑类型
-            String jianzhulx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[6]/text()").toString();
-            //房屋朝向
-            String fangwucx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[7]/text()").toString();
-            //建筑结构
-            String jianzhujg = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[8]/text()").toString();
-            //装修情况
-            String zhuangxiuqk = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[9]/text()").toString();
-            //梯户比例
-            String tihubl = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[10]/text()").toString();
-            //供暖方式
-            String gongnuanfs = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[11]/text()").toString();
-            //配备电梯
-            String peibeidt = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[12]/text()").toString();
-            //产权年限
-            String chanquannx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[13]/text()").toString();
+            //别墅类型
+            String bieshulx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[8]/span[@class='label']/text()").toString();
+            if(!"别墅类型".equals(bieshulx)){
+            	//房屋户型
+                String fangwuhx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[1]/text()").toString();
+                //所在楼层
+                String suozailc = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[2]/text()").toString();
+                //建筑面积
+                String jianzhumj = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[3]/text()").toString();
+                //户型结构
+                String huxingjg = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[4]/text()").toString();
+                //套内面积
+                String taoneimj = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[5]/text()").toString();
+                //建筑类型
+                String jianzhulx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[6]/text()").toString();
+                //房屋朝向
+                String fangwucx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[7]/text()").toString();
+                //建筑结构
+                String jianzhujg = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[8]/text()").toString();
+                //装修情况
+                String zhuangxiuqk = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[9]/text()").toString();
+                //梯户比例
+                String tihubl = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[10]/text()").toString();
+                //供暖方式
+                String gongnuanfs = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[11]/text()").toString();
+                //配备电梯
+                String peibeidt = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[12]/text()").toString();
+                //产权年限
+                String chanquannx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[13]/text()").toString();
+                //基本信息
+                fw.setFangwuhx(fangwuhx);
+                fw.setSuozailc(suozailc);
+                if(jianzhumj!=null&&!"暂无数据".equals(jianzhumj))
+                fw.setJianzhumj(new BigDecimal(jianzhumj.replaceAll("㎡", "")));
+                fw.setHuxingjg(huxingjg);
+                if(taoneimj!=null&&!"暂无数据".equals(taoneimj))
+                fw.setTaoneimj(new BigDecimal(taoneimj.replaceAll("㎡", "")));
+                fw.setJianzhulx(jianzhulx);
+                fw.setFangwucx(fangwucx);
+                fw.setJianzhujg(jianzhujg);
+                fw.setZhuangxiuqk(zhuangxiuqk);
+                fw.setTihubl(tihubl);
+                fw.setGongnuanfs(gongnuanfs);
+                fw.setPeibeidt(peibeidt);
+                fw.setChanquannx(chanquannx);
+            }else{
+            	
+            	//房屋户型
+                String fangwuhx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[1]/text()").toString();
+                //所在楼层
+                String suozailc = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[2]/text()").toString();
+                //建筑面积
+                String jianzhumj = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[3]/text()").toString();
+                //套内面积
+                String taoneimj = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[4]/text()").toString();
+                
+                //房屋朝向
+                String fangwucx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[5]/text()").toString();
+                //建筑结构
+                String jianzhujg = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[6]/text()").toString();
+                //装修情况
+                String zhuangxiuqk = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[7]/text()").toString();
+                //建筑类型(别墅类型)
+                String jianzhulx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[8]/text()").toString();
+                
+                //供暖方式
+                String gongnuanfs = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[9]/text()").toString();
+                //产权年限
+                String chanquannx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[10]/text()").toString();
+                //基本信息
+                fw.setFangwuhx(fangwuhx);
+                fw.setSuozailc(suozailc);
+                if(jianzhumj!=null&&!"暂无数据".equals(jianzhumj))
+                fw.setJianzhumj(new BigDecimal(jianzhumj.replaceAll("㎡", "")));
+                if(taoneimj!=null&&!"暂无数据".equals(taoneimj))
+                fw.setTaoneimj(new BigDecimal(taoneimj.replaceAll("㎡", "")));
+                fw.setJianzhulx(jianzhulx);
+                fw.setFangwucx(fangwucx);
+                fw.setJianzhujg(jianzhujg);
+                fw.setZhuangxiuqk(zhuangxiuqk);
+                fw.setGongnuanfs(gongnuanfs);
+                fw.setChanquannx(chanquannx);
+            	
+            }
+            
             
            //---------------------------------------交易属性-------transaction-----------------------------------------
             //挂牌时间
@@ -155,40 +227,6 @@ public class LianJiaSpider implements PageProcessor {
             //房本备件
             String fangbenbj = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[8]/text()").toString();
             
-            
-           
-            
-            
-            
-            LianjiaFangwuxx fw = new LianjiaFangwuxx();
-            fw.setFangwubh(fangwubh);
-            fw.setDanjia(Integer.parseInt(danjia));
-            fw.setZongjia(Integer.parseInt(zongjia));
-            fw.setXiaoqumc(xiaoqumc);
-            fw.setSuozaics(CSDM);
-            fw.setSuozaiq(suozaiq);
-            fw.setSuozaisq(suozaisq);
-            fw.setSuozaidtxl(suozaidtxl);
-            if(kaifangcs!=null)
-            fw.setKanfangcs(Integer.parseInt(kaifangcs));
-            if(yueyuecs!=null)
-            fw.setYuyuecs(Integer.parseInt(yueyuecs));
-            //基本信息
-            fw.setFangwuhx(fangwuhx);
-            fw.setSuozailc(suozailc);
-            if(jianzhumj!=null&&!"暂无数据".equals(jianzhumj))
-            fw.setJianzhumj(new BigDecimal(jianzhumj.replaceAll("㎡", "")));
-            fw.setHuxingjg(huxingjg);
-            if(taoneimj!=null&&!"暂无数据".equals(taoneimj))
-            fw.setTaoneimj(new BigDecimal(taoneimj.replaceAll("㎡", "")));
-            fw.setJianzhulx(jianzhulx);
-            fw.setFangwucx(fangwucx);
-            fw.setJianzhujg(jianzhujg);
-            fw.setZhuangxiuqk(zhuangxiuqk);
-            fw.setTihubl(tihubl);
-            fw.setGongnuanfs(gongnuanfs);
-            fw.setPeibeidt(peibeidt);
-            fw.setChanquannx(chanquannx);
             //交易信息
             if(guapaisj!=null)
             fw.setGuapaisj(guapaisj.replaceAll("-", ""));

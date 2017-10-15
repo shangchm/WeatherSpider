@@ -14,7 +14,7 @@ public class ProxyIPSpider implements PageProcessor {
 	@Override
 	public Site getSite() {
 		Site site = Site.me().setTimeOut(6000).setRetryTimes(3)
-				.setSleepTime(1000).setCharset("UTF-8").addHeader("Accept-Encoding", "/")
+				.setSleepTime(5000).setCharset("UTF-8").addHeader("Accept-Encoding", "/")
 				.setUserAgent(UserAgentUtils.radomUserAgent());
 		
 		return site;
@@ -41,8 +41,18 @@ public class ProxyIPSpider implements PageProcessor {
 			} 
 		}
 		page.putField("result", result);
-		page.addTargetRequest("http://www.xicidaili.com/nn/2");
-		page.addTargetRequest("http://www.xicidaili.com/nn/3");
+		String current = page.getHtml().xpath("//div[@class='pagination']/em[@class='current']/text()").toString();
+		if(current!=null&&"1".equals(current)){
+		   String pages = page.getHtml().xpath("//div[@class='pagination']/a[10]/text()").toString();
+		   if(pages!=null){
+			   int num = Integer.parseInt(pages);
+			   for (int i = 0; i < num; i++) {
+				   
+				   page.addTargetRequest("http://www.xicidaili.com/wn/"+i);
+			 }
+		   }
+		  
+		}
 	}
 
 }

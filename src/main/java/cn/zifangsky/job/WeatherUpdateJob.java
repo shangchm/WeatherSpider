@@ -15,8 +15,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import cn.zifangsky.activemq.producer.WeatherUpdateSender;
+import cn.zifangsky.manager.CrawlManager;
 import cn.zifangsky.mapper.WeatherStationMapper;
-import cn.zifangsky.model.WeatherStation;
+import cn.zifangsky.spider.ConfigUitl;
 
 /**
  * 天气定时更新任务
@@ -35,17 +36,20 @@ public class WeatherUpdateJob extends QuartzJobBean{
 	@Autowired
 	WeatherStationMapper weatherStationMapper;
 	
+	@Resource(name="crawlManager")
+	private CrawlManager crawlManager;
+	
 	@Override
 	protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 		Date current = new Date();
         Format format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println("开始执行天气定时更新任务，Date：" + format.format(current));
-		logger.debug("开始执行天气定时更新任务，Date： " + format.format(current));
+        System.out.println("开始执行成交房屋信息采集任务，Date：" + format.format(current));
+		logger.debug("开始执行成交房屋信息采集任务，Date： " + format.format(current));
 		
-        List<WeatherStation> list = weatherStationMapper.selectAll();
+		List<String> list = ConfigUitl.getRegion();
 		if(list != null && list.size() > 0){
-			for(WeatherStation station : list){
-				weatherUpdateSender.updateWeather(weatherQueueName, station.getCode());
+			for(String station : list){
+				crawlManager.houseCrawl("tj", station);
 			}
 			
 		}
