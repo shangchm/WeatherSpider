@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zifangsky.mapper.LianjiaFangwuxxMapper" >
+  <resultMap id="BaseResultMap" type="cn.zifangsky.model.LianjiaFangwuxx" >
+    <id column="FANGWUBH" property="fangwubh" jdbcType="VARCHAR" />
+    <result column="DANJIA" property="danjia" jdbcType="DECIMAL" />
+    <result column="ZONGJIA" property="zongjia" jdbcType="DECIMAL" />
+    <result column="XIAOQUMC" property="xiaoqumc" jdbcType="VARCHAR" />
+    <result column="SUOZAICS" property="suozaics" jdbcType="VARCHAR" />
+    <result column="SUOZAIQ" property="suozaiq" jdbcType="VARCHAR" />
+    <result column="SUOZAISQ" property="suozaisq" jdbcType="VARCHAR" />
+    <result column="SUOZAIDTXL" property="suozaidtxl" jdbcType="VARCHAR" />
+    <result column="KANFANGCS" property="kanfangcs" jdbcType="DECIMAL" />
+    <result column="YUYUECS" property="yuyuecs" jdbcType="DECIMAL" />
+    <result column="FANGWUHX" property="fangwuhx" jdbcType="VARCHAR" />
+    <result column="SUOZAILC" property="suozailc" jdbcType="VARCHAR" />
+    <result column="JIANZHUMJ" property="jianzhumj" jdbcType="DECIMAL" />
+    <result column="HUXINGJG" property="huxingjg" jdbcType="VARCHAR" />
+    <result column="TAONEIMJ" property="taoneimj" jdbcType="DECIMAL" />
+    <result column="JIANZHULX" property="jianzhulx" jdbcType="VARCHAR" />
+    <result column="FANGWUCX" property="fangwucx" jdbcType="VARCHAR" />
+    <result column="JIANZHUJG" property="jianzhujg" jdbcType="VARCHAR" />
+    <result column="ZHUANGXIUQK" property="zhuangxiuqk" jdbcType="VARCHAR" />
+    <result column="TIHUBL" property="tihubl" jdbcType="VARCHAR" />
+    <result column="GONGNUANFS" property="gongnuanfs" jdbcType="VARCHAR" />
+    <result column="PEIBEIDT" property="peibeidt" jdbcType="VARCHAR" />
+    <result column="CHANQUANNX" property="chanquannx" jdbcType="VARCHAR" />
+    <result column="GUAPAISJ" property="guapaisj" jdbcType="CHAR" />
+    <result column="JIAOYIQS" property="jiaoyiqs" jdbcType="VARCHAR" />
+    <result column="SHANGCIJY" property="shangcijy" jdbcType="CHAR" />
+    <result column="FANGWUYT" property="fangwuyt" jdbcType="VARCHAR" />
+    <result column="FANGWUNX" property="fangwunx" jdbcType="VARCHAR" />
+    <result column="CHANQUANSS" property="chanquanss" jdbcType="VARCHAR" />
+    <result column="DIYAXX" property="diyaxx" jdbcType="VARCHAR" />
+    <result column="FANGWUBJ" property="fangwubj" jdbcType="VARCHAR" />
+    <result column="SHIFOUCJ" property="shifoucj" jdbcType="VARCHAR" />
+    <result column="CHENGJIAOZJ" property="chengjiaozj" jdbcType="DECIMAL" />
+    <result column="CHENGJIAODJ" property="chengjiaodj" jdbcType="DECIMAL" />
+    <result column="CHENGJIAOZQ" property="chengjiaozq" jdbcType="INTEGER" />
+    <result column="CHENGJIAOSJ" property="chengjiaosj" jdbcType="CHAR" />
+    <result column="LIANJIEDZ" property="lianjiedz" jdbcType="VARCHAR" />
+    <result column="CAOZUOSJ" property="caozuosj" jdbcType="CHAR" />
+    <result column="SHIFOUXZ" property="shifouxz" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FANGWUBH, DANJIA, ZONGJIA, XIAOQUMC, SUOZAICS, SUOZAIQ, SUOZAISQ, SUOZAIDTXL, KANFANGCS, 
+    YUYUECS, FANGWUHX, SUOZAILC, JIANZHUMJ, HUXINGJG, TAONEIMJ, JIANZHULX, FANGWUCX, 
+    JIANZHUJG, ZHUANGXIUQK, TIHUBL, GONGNUANFS, PEIBEIDT, CHANQUANNX, GUAPAISJ, JIAOYIQS, 
+    SHANGCIJY, FANGWUYT, FANGWUNX, CHANQUANSS, DIYAXX, FANGWUBJ, SHIFOUCJ, CHENGJIAOZJ, 
+    CHENGJIAODJ, CHENGJIAOZQ, CHENGJIAOSJ, LIANJIEDZ, CAOZUOSJ, SHIFOUXZ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from lianjia_fangwuxx
+    where FANGWUBH = #{fangwubh,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from lianjia_fangwuxx
+    where FANGWUBH = #{fangwubh,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.zifangsky.model.LianjiaFangwuxx" >
+    insert into lianjia_fangwuxx (FANGWUBH, DANJIA, ZONGJIA, 
+      XIAOQUMC, SUOZAICS, SUOZAIQ, 
+      SUOZAISQ, SUOZAIDTXL, KANFANGCS, 
+      YUYUECS, FANGWUHX, SUOZAILC, 
+      JIANZHUMJ, HUXINGJG, TAONEIMJ, 
+      JIANZHULX, FANGWUCX, JIANZHUJG, 
+      ZHUANGXIUQK, TIHUBL, GONGNUANFS, 
+      PEIBEIDT, CHANQUANNX, GUAPAISJ, 
+      JIAOYIQS, SHANGCIJY, FANGWUYT, 
+      FANGWUNX, CHANQUANSS, DIYAXX, 
+      FANGWUBJ, SHIFOUCJ, CHENGJIAOZJ, 
+      CHENGJIAODJ, CHENGJIAOZQ, CHENGJIAOSJ, 
+      LIANJIEDZ, CAOZUOSJ, SHIFOUXZ
+      )
+    values (#{fangwubh,jdbcType=VARCHAR}, #{danjia,jdbcType=DECIMAL}, #{zongjia,jdbcType=DECIMAL}, 
+      #{xiaoqumc,jdbcType=VARCHAR}, #{suozaics,jdbcType=VARCHAR}, #{suozaiq,jdbcType=VARCHAR}, 
+      #{suozaisq,jdbcType=VARCHAR}, #{suozaidtxl,jdbcType=VARCHAR}, #{kanfangcs,jdbcType=DECIMAL}, 
+      #{yuyuecs,jdbcType=DECIMAL}, #{fangwuhx,jdbcType=VARCHAR}, #{suozailc,jdbcType=VARCHAR}, 
+      #{jianzhumj,jdbcType=DECIMAL}, #{huxingjg,jdbcType=VARCHAR}, #{taoneimj,jdbcType=DECIMAL}, 
+      #{jianzhulx,jdbcType=VARCHAR}, #{fangwucx,jdbcType=VARCHAR}, #{jianzhujg,jdbcType=VARCHAR}, 
+      #{zhuangxiuqk,jdbcType=VARCHAR}, #{tihubl,jdbcType=VARCHAR}, #{gongnuanfs,jdbcType=VARCHAR}, 
+      #{peibeidt,jdbcType=VARCHAR}, #{chanquannx,jdbcType=VARCHAR}, #{guapaisj,jdbcType=CHAR}, 
+      #{jiaoyiqs,jdbcType=VARCHAR}, #{shangcijy,jdbcType=CHAR}, #{fangwuyt,jdbcType=VARCHAR}, 
+      #{fangwunx,jdbcType=VARCHAR}, #{chanquanss,jdbcType=VARCHAR}, #{diyaxx,jdbcType=VARCHAR}, 
+      #{fangwubj,jdbcType=VARCHAR}, #{shifoucj,jdbcType=VARCHAR}, #{chengjiaozj,jdbcType=DECIMAL}, 
+      #{chengjiaodj,jdbcType=DECIMAL}, #{chengjiaozq,jdbcType=INTEGER}, #{chengjiaosj,jdbcType=CHAR}, 
+      #{lianjiedz,jdbcType=VARCHAR}, #{caozuosj,jdbcType=CHAR}, #{shifouxz,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zifangsky.model.LianjiaFangwuxx" >
+    insert into lianjia_fangwuxx
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fangwubh != null" >
+        FANGWUBH,
+      </if>
+      <if test="danjia != null" >
+        DANJIA,
+      </if>
+      <if test="zongjia != null" >
+        ZONGJIA,
+      </if>
+      <if test="xiaoqumc != null" >
+        XIAOQUMC,
+      </if>
+      <if test="suozaics != null" >
+        SUOZAICS,
+      </if>
+      <if test="suozaiq != null" >
+        SUOZAIQ,
+      </if>
+      <if test="suozaisq != null" >
+        SUOZAISQ,
+      </if>
+      <if test="suozaidtxl != null" >
+        SUOZAIDTXL,
+      </if>
+      <if test="kanfangcs != null" >
+        KANFANGCS,
+      </if>
+      <if test="yuyuecs != null" >
+        YUYUECS,
+      </if>
+      <if test="fangwuhx != null" >
+        FANGWUHX,
+      </if>
+      <if test="suozailc != null" >
+        SUOZAILC,
+      </if>
+      <if test="jianzhumj != null" >
+        JIANZHUMJ,
+      </if>
+      <if test="huxingjg != null" >
+        HUXINGJG,
+      </if>
+      <if test="taoneimj != null" >
+        TAONEIMJ,
+      </if>
+      <if test="jianzhulx != null" >
+        JIANZHULX,
+      </if>
+      <if test="fangwucx != null" >
+        FANGWUCX,
+      </if>
+      <if test="jianzhujg != null" >
+        JIANZHUJG,
+      </if>
+      <if test="zhuangxiuqk != null" >
+        ZHUANGXIUQK,
+      </if>
+      <if test="tihubl != null" >
+        TIHUBL,
+      </if>
+      <if test="gongnuanfs != null" >
+        GONGNUANFS,
+      </if>
+      <if test="peibeidt != null" >
+        PEIBEIDT,
+      </if>
+      <if test="chanquannx != null" >
+        CHANQUANNX,
+      </if>
+      <if test="guapaisj != null" >
+        GUAPAISJ,
+      </if>
+      <if test="jiaoyiqs != null" >
+        JIAOYIQS,
+      </if>
+      <if test="shangcijy != null" >
+        SHANGCIJY,
+      </if>
+      <if test="fangwuyt != null" >
+        FANGWUYT,
+      </if>
+      <if test="fangwunx != null" >
+        FANGWUNX,
+      </if>
+      <if test="chanquanss != null" >
+        CHANQUANSS,
+      </if>
+      <if test="diyaxx != null" >
+        DIYAXX,
+      </if>
+      <if test="fangwubj != null" >
+        FANGWUBJ,
+      </if>
+      <if test="shifoucj != null" >
+        SHIFOUCJ,
+      </if>
+      <if test="chengjiaozj != null" >
+        CHENGJIAOZJ,
+      </if>
+      <if test="chengjiaodj != null" >
+        CHENGJIAODJ,
+      </if>
+      <if test="chengjiaozq != null" >
+        CHENGJIAOZQ,
+      </if>
+      <if test="chengjiaosj != null" >
+        CHENGJIAOSJ,
+      </if>
+      <if test="lianjiedz != null" >
+        LIANJIEDZ,
+      </if>
+      <if test="caozuosj != null" >
+        CAOZUOSJ,
+      </if>
+      <if test="shifouxz != null" >
+        SHIFOUXZ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fangwubh != null" >
+        #{fangwubh,jdbcType=VARCHAR},
+      </if>
+      <if test="danjia != null" >
+        #{danjia,jdbcType=DECIMAL},
+      </if>
+      <if test="zongjia != null" >
+        #{zongjia,jdbcType=DECIMAL},
+      </if>
+      <if test="xiaoqumc != null" >
+        #{xiaoqumc,jdbcType=VARCHAR},
+      </if>
+      <if test="suozaics != null" >
+        #{suozaics,jdbcType=VARCHAR},
+      </if>
+      <if test="suozaiq != null" >
+        #{suozaiq,jdbcType=VARCHAR},
+      </if>
+      <if test="suozaisq != null" >
+        #{suozaisq,jdbcType=VARCHAR},
+      </if>
+      <if test="suozaidtxl != null" >
+        #{suozaidtxl,jdbcType=VARCHAR},
+      </if>
+      <if test="kanfangcs != null" >
+        #{kanfangcs,jdbcType=DECIMAL},
+      </if>
+      <if test="yuyuecs != null" >
+        #{yuyuecs,jdbcType=DECIMAL},
+      </if>
+      <if test="fangwuhx != null" >
+        #{fangwuhx,jdbcType=VARCHAR},
+      </if>
+      <if test="suozailc != null" >
+        #{suozailc,jdbcType=VARCHAR},
+      </if>
+      <if test="jianzhumj != null" >
+        #{jianzhumj,jdbcType=DECIMAL},
+      </if>
+      <if test="huxingjg != null" >
+        #{huxingjg,jdbcType=VARCHAR},
+      </if>
+      <if test="taoneimj != null" >
+        #{taoneimj,jdbcType=DECIMAL},
+      </if>
+      <if test="jianzhulx != null" >
+        #{jianzhulx,jdbcType=VARCHAR},
+      </if>
+      <if test="fangwucx != null" >
+        #{fangwucx,jdbcType=VARCHAR},
+      </if>
+      <if test="jianzhujg != null" >
+        #{jianzhujg,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuangxiuqk != null" >
+        #{zhuangxiuqk,jdbcType=VARCHAR},
+      </if>
+      <if test="tihubl != null" >
+        #{tihubl,jdbcType=VARCHAR},
+      </if>
+      <if test="gongnuanfs != null" >
+        #{gongnuanfs,jdbcType=VARCHAR},
+      </if>
+      <if test="peibeidt != null" >
+        #{peibeidt,jdbcType=VARCHAR},
+      </if>
+      <if test="chanquannx != null" >
+        #{chanquannx,jdbcType=VARCHAR},
+      </if>
+      <if test="guapaisj != null" >
+        #{guapaisj,jdbcType=CHAR},
+      </if>
+      <if test="jiaoyiqs != null" >
+        #{jiaoyiqs,jdbcType=VARCHAR},
+      </if>
+      <if test="shangcijy != null" >
+        #{shangcijy,jdbcType=CHAR},
+      </if>
+      <if test="fangwuyt != null" >
+        #{fangwuyt,jdbcType=VARCHAR},
+      </if>
+      <if test="fangwunx != null" >
+        #{fangwunx,jdbcType=VARCHAR},
+      </if>
+      <if test="chanquanss != null" >
+        #{chanquanss,jdbcType=VARCHAR},
+      </if>
+      <if test="diyaxx != null" >
+        #{diyaxx,jdbcType=VARCHAR},
+      </if>
+      <if test="fangwubj != null" >
+        #{fangwubj,jdbcType=VARCHAR},
+      </if>
+      <if test="shifoucj != null" >
+        #{shifoucj,jdbcType=VARCHAR},
+      </if>
+      <if test="chengjiaozj != null" >
+        #{chengjiaozj,jdbcType=DECIMAL},
+      </if>
+      <if test="chengjiaodj != null" >
+        #{chengjiaodj,jdbcType=DECIMAL},
+      </if>
+      <if test="chengjiaozq != null" >
+        #{chengjiaozq,jdbcType=INTEGER},
+      </if>
+      <if test="chengjiaosj != null" >
+        #{chengjiaosj,jdbcType=CHAR},
+      </if>
+      <if test="lianjiedz != null" >
+        #{lianjiedz,jdbcType=VARCHAR},
+      </if>
+      <if test="caozuosj != null" >
+        #{caozuosj,jdbcType=CHAR},
+      </if>
+      <if test="shifouxz != null" >
+        #{shifouxz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zifangsky.model.LianjiaFangwuxx" >
+    update lianjia_fangwuxx
+    <set >
+      <if test="danjia != null" >
+        DANJIA = #{danjia,jdbcType=DECIMAL},
+      </if>
+      <if test="zongjia != null" >
+        ZONGJIA = #{zongjia,jdbcType=DECIMAL},
+      </if>
+      <if test="xiaoqumc != null" >
+        XIAOQUMC = #{xiaoqumc,jdbcType=VARCHAR},
+      </if>
+      <if test="suozaics != null" >
+        SUOZAICS = #{suozaics,jdbcType=VARCHAR},
+      </if>
+      <if test="suozaiq != null" >
+        SUOZAIQ = #{suozaiq,jdbcType=VARCHAR},
+      </if>
+      <if test="suozaisq != null" >
+        SUOZAISQ = #{suozaisq,jdbcType=VARCHAR},
+      </if>
+      <if test="suozaidtxl != null" >
+        SUOZAIDTXL = #{suozaidtxl,jdbcType=VARCHAR},
+      </if>
+      <if test="kanfangcs != null" >
+        KANFANGCS = #{kanfangcs,jdbcType=DECIMAL},
+      </if>
+      <if test="yuyuecs != null" >
+        YUYUECS = #{yuyuecs,jdbcType=DECIMAL},
+      </if>
+      <if test="fangwuhx != null" >
+        FANGWUHX = #{fangwuhx,jdbcType=VARCHAR},
+      </if>
+      <if test="suozailc != null" >
+        SUOZAILC = #{suozailc,jdbcType=VARCHAR},
+      </if>
+      <if test="jianzhumj != null" >
+        JIANZHUMJ = #{jianzhumj,jdbcType=DECIMAL},
+      </if>
+      <if test="huxingjg != null" >
+        HUXINGJG = #{huxingjg,jdbcType=VARCHAR},
+      </if>
+      <if test="taoneimj != null" >
+        TAONEIMJ = #{taoneimj,jdbcType=DECIMAL},
+      </if>
+      <if test="jianzhulx != null" >
+        JIANZHULX = #{jianzhulx,jdbcType=VARCHAR},
+      </if>
+      <if test="fangwucx != null" >
+        FANGWUCX = #{fangwucx,jdbcType=VARCHAR},
+      </if>
+      <if test="jianzhujg != null" >
+        JIANZHUJG = #{jianzhujg,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuangxiuqk != null" >
+        ZHUANGXIUQK = #{zhuangxiuqk,jdbcType=VARCHAR},
+      </if>
+      <if test="tihubl != null" >
+        TIHUBL = #{tihubl,jdbcType=VARCHAR},
+      </if>
+      <if test="gongnuanfs != null" >
+        GONGNUANFS = #{gongnuanfs,jdbcType=VARCHAR},
+      </if>
+      <if test="peibeidt != null" >
+        PEIBEIDT = #{peibeidt,jdbcType=VARCHAR},
+      </if>
+      <if test="chanquannx != null" >
+        CHANQUANNX = #{chanquannx,jdbcType=VARCHAR},
+      </if>
+      <if test="guapaisj != null" >
+        GUAPAISJ = #{guapaisj,jdbcType=CHAR},
+      </if>
+      <if test="jiaoyiqs != null" >
+        JIAOYIQS = #{jiaoyiqs,jdbcType=VARCHAR},
+      </if>
+      <if test="shangcijy != null" >
+        SHANGCIJY = #{shangcijy,jdbcType=CHAR},
+      </if>
+      <if test="fangwuyt != null" >
+        FANGWUYT = #{fangwuyt,jdbcType=VARCHAR},
+      </if>
+      <if test="fangwunx != null" >
+        FANGWUNX = #{fangwunx,jdbcType=VARCHAR},
+      </if>
+      <if test="chanquanss != null" >
+        CHANQUANSS = #{chanquanss,jdbcType=VARCHAR},
+      </if>
+      <if test="diyaxx != null" >
+        DIYAXX = #{diyaxx,jdbcType=VARCHAR},
+      </if>
+      <if test="fangwubj != null" >
+        FANGWUBJ = #{fangwubj,jdbcType=VARCHAR},
+      </if>
+      <if test="shifoucj != null" >
+        SHIFOUCJ = #{shifoucj,jdbcType=VARCHAR},
+      </if>
+      <if test="chengjiaozj != null" >
+        CHENGJIAOZJ = #{chengjiaozj,jdbcType=DECIMAL},
+      </if>
+      <if test="chengjiaodj != null" >
+        CHENGJIAODJ = #{chengjiaodj,jdbcType=DECIMAL},
+      </if>
+      <if test="chengjiaozq != null" >
+        CHENGJIAOZQ = #{chengjiaozq,jdbcType=INTEGER},
+      </if>
+      <if test="chengjiaosj != null" >
+        CHENGJIAOSJ = #{chengjiaosj,jdbcType=CHAR},
+      </if>
+      <if test="lianjiedz != null" >
+        LIANJIEDZ = #{lianjiedz,jdbcType=VARCHAR},
+      </if>
+      <if test="caozuosj != null" >
+        CAOZUOSJ = #{caozuosj,jdbcType=CHAR},
+      </if>
+      <if test="shifouxz != null" >
+        SHIFOUXZ = #{shifouxz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FANGWUBH = #{fangwubh,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zifangsky.model.LianjiaFangwuxx" >
+    update lianjia_fangwuxx
+    set DANJIA = #{danjia,jdbcType=DECIMAL},
+      ZONGJIA = #{zongjia,jdbcType=DECIMAL},
+      XIAOQUMC = #{xiaoqumc,jdbcType=VARCHAR},
+      SUOZAICS = #{suozaics,jdbcType=VARCHAR},
+      SUOZAIQ = #{suozaiq,jdbcType=VARCHAR},
+      SUOZAISQ = #{suozaisq,jdbcType=VARCHAR},
+      SUOZAIDTXL = #{suozaidtxl,jdbcType=VARCHAR},
+      KANFANGCS = #{kanfangcs,jdbcType=DECIMAL},
+      YUYUECS = #{yuyuecs,jdbcType=DECIMAL},
+      FANGWUHX = #{fangwuhx,jdbcType=VARCHAR},
+      SUOZAILC = #{suozailc,jdbcType=VARCHAR},
+      JIANZHUMJ = #{jianzhumj,jdbcType=DECIMAL},
+      HUXINGJG = #{huxingjg,jdbcType=VARCHAR},
+      TAONEIMJ = #{taoneimj,jdbcType=DECIMAL},
+      JIANZHULX = #{jianzhulx,jdbcType=VARCHAR},
+      FANGWUCX = #{fangwucx,jdbcType=VARCHAR},
+      JIANZHUJG = #{jianzhujg,jdbcType=VARCHAR},
+      ZHUANGXIUQK = #{zhuangxiuqk,jdbcType=VARCHAR},
+      TIHUBL = #{tihubl,jdbcType=VARCHAR},
+      GONGNUANFS = #{gongnuanfs,jdbcType=VARCHAR},
+      PEIBEIDT = #{peibeidt,jdbcType=VARCHAR},
+      CHANQUANNX = #{chanquannx,jdbcType=VARCHAR},
+      GUAPAISJ = #{guapaisj,jdbcType=CHAR},
+      JIAOYIQS = #{jiaoyiqs,jdbcType=VARCHAR},
+      SHANGCIJY = #{shangcijy,jdbcType=CHAR},
+      FANGWUYT = #{fangwuyt,jdbcType=VARCHAR},
+      FANGWUNX = #{fangwunx,jdbcType=VARCHAR},
+      CHANQUANSS = #{chanquanss,jdbcType=VARCHAR},
+      DIYAXX = #{diyaxx,jdbcType=VARCHAR},
+      FANGWUBJ = #{fangwubj,jdbcType=VARCHAR},
+      SHIFOUCJ = #{shifoucj,jdbcType=VARCHAR},
+      CHENGJIAOZJ = #{chengjiaozj,jdbcType=DECIMAL},
+      CHENGJIAODJ = #{chengjiaodj,jdbcType=DECIMAL},
+      CHENGJIAOZQ = #{chengjiaozq,jdbcType=INTEGER},
+      CHENGJIAOSJ = #{chengjiaosj,jdbcType=CHAR},
+      LIANJIEDZ = #{lianjiedz,jdbcType=VARCHAR},
+      CAOZUOSJ = #{caozuosj,jdbcType=CHAR},
+      SHIFOUXZ = #{shifouxz,jdbcType=VARCHAR}
+    where FANGWUBH = #{fangwubh,jdbcType=VARCHAR}
+  </update>
+</mapper>

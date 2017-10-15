@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zifangsky.mapper.LianjiaTiaojiafwMapper" >
+  <resultMap id="BaseResultMap" type="cn.zifangsky.model.LianjiaTiaojiafw" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FANGWUBH" property="fangwubh" jdbcType="VARCHAR" />
+    <result column="DANGJIA" property="dangjia" jdbcType="DECIMAL" />
+    <result column="ZONGJIA" property="zongjia" jdbcType="DECIMAL" />
+    <result column="TIAOJIASJ" property="tiaojiasj" jdbcType="CHAR" />
+    <result column="TIAOJIALX" property="tiaojialx" jdbcType="VARCHAR" />
+    <result column="TIAOJIAJE" property="tiaojiaje" jdbcType="DECIMAL" />
+    <result column="CAOZUOSJ" property="caozuosj" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FANGWUBH, DANGJIA, ZONGJIA, TIAOJIASJ, TIAOJIALX, TIAOJIAJE, CAOZUOSJ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lianjia_tiaojiafw
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lianjia_tiaojiafw
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.zifangsky.model.LianjiaTiaojiafw" >
+    insert into lianjia_tiaojiafw (ID, FANGWUBH, DANGJIA, 
+      ZONGJIA, TIAOJIASJ, TIAOJIALX, 
+      TIAOJIAJE, CAOZUOSJ)
+    values (#{id,jdbcType=INTEGER}, #{fangwubh,jdbcType=VARCHAR}, #{dangjia,jdbcType=DECIMAL}, 
+      #{zongjia,jdbcType=DECIMAL}, #{tiaojiasj,jdbcType=CHAR}, #{tiaojialx,jdbcType=VARCHAR}, 
+      #{tiaojiaje,jdbcType=DECIMAL}, #{caozuosj,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zifangsky.model.LianjiaTiaojiafw" >
+    insert into lianjia_tiaojiafw
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fangwubh != null" >
+        FANGWUBH,
+      </if>
+      <if test="dangjia != null" >
+        DANGJIA,
+      </if>
+      <if test="zongjia != null" >
+        ZONGJIA,
+      </if>
+      <if test="tiaojiasj != null" >
+        TIAOJIASJ,
+      </if>
+      <if test="tiaojialx != null" >
+        TIAOJIALX,
+      </if>
+      <if test="tiaojiaje != null" >
+        TIAOJIAJE,
+      </if>
+      <if test="caozuosj != null" >
+        CAOZUOSJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fangwubh != null" >
+        #{fangwubh,jdbcType=VARCHAR},
+      </if>
+      <if test="dangjia != null" >
+        #{dangjia,jdbcType=DECIMAL},
+      </if>
+      <if test="zongjia != null" >
+        #{zongjia,jdbcType=DECIMAL},
+      </if>
+      <if test="tiaojiasj != null" >
+        #{tiaojiasj,jdbcType=CHAR},
+      </if>
+      <if test="tiaojialx != null" >
+        #{tiaojialx,jdbcType=VARCHAR},
+      </if>
+      <if test="tiaojiaje != null" >
+        #{tiaojiaje,jdbcType=DECIMAL},
+      </if>
+      <if test="caozuosj != null" >
+        #{caozuosj,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zifangsky.model.LianjiaTiaojiafw" >
+    update lianjia_tiaojiafw
+    <set >
+      <if test="fangwubh != null" >
+        FANGWUBH = #{fangwubh,jdbcType=VARCHAR},
+      </if>
+      <if test="dangjia != null" >
+        DANGJIA = #{dangjia,jdbcType=DECIMAL},
+      </if>
+      <if test="zongjia != null" >
+        ZONGJIA = #{zongjia,jdbcType=DECIMAL},
+      </if>
+      <if test="tiaojiasj != null" >
+        TIAOJIASJ = #{tiaojiasj,jdbcType=CHAR},
+      </if>
+      <if test="tiaojialx != null" >
+        TIAOJIALX = #{tiaojialx,jdbcType=VARCHAR},
+      </if>
+      <if test="tiaojiaje != null" >
+        TIAOJIAJE = #{tiaojiaje,jdbcType=DECIMAL},
+      </if>
+      <if test="caozuosj != null" >
+        CAOZUOSJ = #{caozuosj,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zifangsky.model.LianjiaTiaojiafw" >
+    update lianjia_tiaojiafw
+    set FANGWUBH = #{fangwubh,jdbcType=VARCHAR},
+      DANGJIA = #{dangjia,jdbcType=DECIMAL},
+      ZONGJIA = #{zongjia,jdbcType=DECIMAL},
+      TIAOJIASJ = #{tiaojiasj,jdbcType=CHAR},
+      TIAOJIALX = #{tiaojialx,jdbcType=VARCHAR},
+      TIAOJIAJE = #{tiaojiaje,jdbcType=DECIMAL},
+      CAOZUOSJ = #{caozuosj,jdbcType=CHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

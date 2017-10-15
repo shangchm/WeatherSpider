@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zifangsky.mapper.LianjiaDaikanfwMapper" >
+  <resultMap id="BaseResultMap" type="cn.zifangsky.model.LianjiaDaikanfw" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FANGWUBH" property="fangwubh" jdbcType="VARCHAR" />
+    <result column="DAIKANSJ" property="daikansj" jdbcType="CHAR" />
+    <result column="DAIKANCS" property="daikancs" jdbcType="DECIMAL" />
+    <result column="CAOZUOSJ" property="caozuosj" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FANGWUBH, DAIKANSJ, DAIKANCS, CAOZUOSJ
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from lianjia_daikanfw
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from lianjia_daikanfw
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.zifangsky.model.LianjiaDaikanfw" >
+    insert into lianjia_daikanfw (ID, FANGWUBH, DAIKANSJ, 
+      DAIKANCS, CAOZUOSJ)
+    values (#{id,jdbcType=INTEGER}, #{fangwubh,jdbcType=VARCHAR}, #{daikansj,jdbcType=CHAR}, 
+      #{daikancs,jdbcType=DECIMAL}, #{caozuosj,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.zifangsky.model.LianjiaDaikanfw" >
+    insert into lianjia_daikanfw
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fangwubh != null" >
+        FANGWUBH,
+      </if>
+      <if test="daikansj != null" >
+        DAIKANSJ,
+      </if>
+      <if test="daikancs != null" >
+        DAIKANCS,
+      </if>
+      <if test="caozuosj != null" >
+        CAOZUOSJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fangwubh != null" >
+        #{fangwubh,jdbcType=VARCHAR},
+      </if>
+      <if test="daikansj != null" >
+        #{daikansj,jdbcType=CHAR},
+      </if>
+      <if test="daikancs != null" >
+        #{daikancs,jdbcType=DECIMAL},
+      </if>
+      <if test="caozuosj != null" >
+        #{caozuosj,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.zifangsky.model.LianjiaDaikanfw" >
+    update lianjia_daikanfw
+    <set >
+      <if test="fangwubh != null" >
+        FANGWUBH = #{fangwubh,jdbcType=VARCHAR},
+      </if>
+      <if test="daikansj != null" >
+        DAIKANSJ = #{daikansj,jdbcType=CHAR},
+      </if>
+      <if test="daikancs != null" >
+        DAIKANCS = #{daikancs,jdbcType=DECIMAL},
+      </if>
+      <if test="caozuosj != null" >
+        CAOZUOSJ = #{caozuosj,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.zifangsky.model.LianjiaDaikanfw" >
+    update lianjia_daikanfw
+    set FANGWUBH = #{fangwubh,jdbcType=VARCHAR},
+      DAIKANSJ = #{daikansj,jdbcType=CHAR},
+      DAIKANCS = #{daikancs,jdbcType=DECIMAL},
+      CAOZUOSJ = #{caozuosj,jdbcType=CHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
