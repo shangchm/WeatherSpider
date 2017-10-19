@@ -13,12 +13,12 @@ public class ConfigUitl {
 		//list.add("nankai");
 		//list.add("hexi");
 		list.add("hebei");
-		list.add("hedong");
+		//list.add("hedong");
 		list.add("hongqiao");
 		list.add("xiqing");
-		list.add("beichen");
+		//list.add("beichen");
 		list.add("dongli");
-		list.add("jinnan");
+		//list.add("jinnan");
 		list.add("tanggu");
 		list.add("kaifaqutj");
 		return list;

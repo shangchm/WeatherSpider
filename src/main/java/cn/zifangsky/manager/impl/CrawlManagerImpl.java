@@ -67,7 +67,7 @@ public class CrawlManagerImpl implements CrawlManager {
 		//--------使用代理池--end-------
 		.addUrl("https://"+csdm+".lianjia.com/ershoufang/"+qydm+"/pg1")
 		.addPipeline(lianjianPipeline)
-		.thread(5)
+		.thread(2)
 		.run();
 	}
 	

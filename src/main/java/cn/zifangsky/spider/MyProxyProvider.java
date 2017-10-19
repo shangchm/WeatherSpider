@@ -2,7 +2,9 @@ package cn.zifangsky.spider;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import us.codecraft.webmagic.Page;
@@ -23,7 +25,9 @@ public class MyProxyProvider implements ProxyProvider {
 
     private final AtomicInteger pointer;
     
-    private static List<String>  ADDRESS = new ArrayList<String>();
+    
+    private static Map<String,Integer> addessMap = new HashMap<String,Integer>();
+    
 
     public MyProxyProvider(List<Proxy> proxies) {
         this(proxies, new AtomicInteger(-1));
@@ -44,10 +48,14 @@ public class MyProxyProvider implements ProxyProvider {
 
     @Override
     public void returnProxy(Proxy proxy, Page page, Task task) {
-    	  if(page.isDownloadSuccess()){
-    		 System.out.println("proxy:"+proxy.getHost()+":"+proxy.getPort());
-    	  }else{
-    		  ADDRESS.add(proxy.getHost()+":"+proxy.getPort());
+    	  if(!page.isDownloadSuccess()){
+    		 System.out.println("bad proxy:"+proxy.getHost()+":"+proxy.getPort());
+    		 if(addessMap.containsKey(proxy.getHost()+":"+proxy.getPort())){
+    		    int cishu = addessMap.get(proxy.getHost()+":"+proxy.getPort());
+    		    addessMap.put(proxy.getHost()+":"+proxy.getPort(), cishu+1);
+    		 }else{
+    			addessMap.put(proxy.getHost()+":"+proxy.getPort(), 1); 
+    		 }
     	  }
     }
 
@@ -55,7 +63,7 @@ public class MyProxyProvider implements ProxyProvider {
     public Proxy getProxy(Task task) {
     	Proxy proxy = proxies.get(incrForLoop());
     	String ip = proxy.getHost()+":"+proxy.getPort();
-    	while(ADDRESS.contains(ip)){
+    	while(addessMap.containsKey(ip)&&addessMap.get(ip)>=3){
     		System.out.println("禁用ip:"+ip);
     		proxy = proxies.get(incrForLoop());
     		ip = proxy.getHost()+":"+proxy.getPort();
