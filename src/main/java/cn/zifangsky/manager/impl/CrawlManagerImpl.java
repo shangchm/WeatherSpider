@@ -18,14 +18,12 @@ import cn.zifangsky.spider.LianJiaCJSpider;
 import cn.zifangsky.spider.LianJiaSpider;
 import cn.zifangsky.spider.LianjianCJPipeline;
 import cn.zifangsky.spider.LianjianPipeline;
+import cn.zifangsky.spider.MyProxyProvider;
 import cn.zifangsky.spider.ProxyIPPipeline;
-import cn.zifangsky.spider.ProxyIPSpider;
-import cn.zifangsky.spider.ProxyIPSpider2;
 import cn.zifangsky.spider.WeatherSpider;
 import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.proxy.Proxy;
-import us.codecraft.webmagic.proxy.SimpleProxyProvider;
 
 @Service("crawlManager")
 public class CrawlManagerImpl implements CrawlManager {
@@ -69,7 +67,7 @@ public class CrawlManagerImpl implements CrawlManager {
 		//--------使用代理池--end-------
 		.addUrl("https://"+csdm+".lianjia.com/ershoufang/"+qydm+"/pg1")
 		.addPipeline(lianjianPipeline)
-		.thread(1)
+		.thread(5)
 		.run();
 	}
 	
@@ -84,7 +82,7 @@ public class CrawlManagerImpl implements CrawlManager {
 		//--------使用代理池--end-------
 		.addUrl("https://"+csdm+".lianjia.com/chengjiao/"+qydm+"/pg1")
 		.addPipeline(lianjianCJPipeline)
-		.thread(2)
+		.thread(5)
 		.run();
 	}
 
@@ -92,23 +90,23 @@ public class CrawlManagerImpl implements CrawlManager {
 
 	@Override
 	public void proxyIPCrawl() {
-		HttpClientDownloader httpClientDownloader = proxyDownloader("http://www.xicidaili.com");
+		/*HttpClientDownloader httpClientDownloader = proxyDownloader("http://www.xicidaili.com");
 		OOSpider.create(new ProxyIPSpider())
 		.setDownloader(httpClientDownloader)
 		.addUrl("http://www.xicidaili.com/wn/").addPipeline(proxyIPPipeline)
 		.thread(1)
-		.run();
+		.run();*/
 	}
 
 	@Override
 	public void proxyIPCrawl2() {
-		HttpClientDownloader httpClientDownloader = proxyDownloader("http://www.kuaidaili.com");
+		/*HttpClientDownloader httpClientDownloader = proxyDownloader("http://www.kuaidaili.com");
 		OOSpider.create(new ProxyIPSpider2())
 		.setDownloader(httpClientDownloader)
 		.addUrl("http://www.kuaidaili.com/free/inha/1/")
 		.addPipeline(proxyIPPipeline)
 		.thread(1)
-		.run();
+		.run();*/
 	}
 
 
@@ -139,7 +137,7 @@ public class CrawlManagerImpl implements CrawlManager {
 				ipList[i] = new Proxy(proxyIp.getIp(),proxyIp.getPort());
 			}
 		System.out.println("【代理IP资源池可用IP地址数】："+ipList.length);
-		SimpleProxyProvider proxyProvider = SimpleProxyProvider.from(ipList);  
+		MyProxyProvider proxyProvider = MyProxyProvider.from(ipList);  
 		httpClientDownloader.setProxyProvider(proxyProvider);
 		return httpClientDownloader;
 	}

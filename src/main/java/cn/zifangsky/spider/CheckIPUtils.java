@@ -49,8 +49,8 @@ public class CheckIPUtils {
 			InetSocketAddress proxyAddr = new InetSocketAddress(ip, port);
 			Proxy proxy = new Proxy(Proxy.Type.HTTP, proxyAddr);
 			connection = (HttpURLConnection) url.openConnection(proxy);
-			connection.setReadTimeout(1000);
-			connection.setConnectTimeout(1000);
+			connection.setReadTimeout(2000);
+			connection.setConnectTimeout(2000);
 			connection.setRequestMethod("GET");
 
 			if(connection.getResponseCode() == 200){

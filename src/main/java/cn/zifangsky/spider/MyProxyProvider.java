@@ -22,6 +22,8 @@ public class MyProxyProvider implements ProxyProvider {
     private final List<Proxy> proxies;
 
     private final AtomicInteger pointer;
+    
+    private static List<String>  ADDRESS = new ArrayList<String>();
 
     public MyProxyProvider(List<Proxy> proxies) {
         this(proxies, new AtomicInteger(-1));
@@ -45,13 +47,21 @@ public class MyProxyProvider implements ProxyProvider {
     	  if(page.isDownloadSuccess()){
     		 System.out.println("proxy:"+proxy.getHost()+":"+proxy.getPort());
     	  }else{
-    		  proxy=null;
+    		  ADDRESS.add(proxy.getHost()+":"+proxy.getPort());
     	  }
     }
 
     @Override
     public Proxy getProxy(Task task) {
-        return proxies.get(incrForLoop());
+    	Proxy proxy = proxies.get(incrForLoop());
+    	String ip = proxy.getHost()+":"+proxy.getPort();
+    	while(ADDRESS.contains(ip)){
+    		System.out.println("禁用ip:"+ip);
+    		proxy = proxies.get(incrForLoop());
+    		ip = proxy.getHost()+":"+proxy.getPort();
+    	}
+    	
+        return proxy;
     }
 
     private int incrForLoop() {

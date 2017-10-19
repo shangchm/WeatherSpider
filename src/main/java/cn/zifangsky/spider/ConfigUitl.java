@@ -11,7 +11,7 @@ public class ConfigUitl {
 		List<String> list = new ArrayList<String>();
 		//list.add("heping");
 		//list.add("nankai");
-		list.add("hexi");
+		//list.add("hexi");
 		list.add("hebei");
 		list.add("hedong");
 		list.add("hongqiao");
