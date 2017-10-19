@@ -43,7 +43,7 @@ public class MyProxyProvider implements ProxyProvider {
     @Override
     public void returnProxy(Proxy proxy, Page page, Task task) {
     	  if(page.isDownloadSuccess()){
-    		  System.out.println("proxy:"+proxy.getHost()+":"+proxy.getPort());
+    		 System.out.println("proxy:"+proxy.getHost()+":"+proxy.getPort());
     	  }else{
     		  proxy=null;
     	  }
