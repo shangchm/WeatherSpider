@@ -1,5 +1,7 @@
 package cn.zifangsky.mapper;
 
+import java.util.List;
+
 import cn.zifangsky.model.LianjiaFangwuxx;
 
 public interface LianjiaFangwuxxMapper {
@@ -14,4 +16,6 @@ public interface LianjiaFangwuxxMapper {
     int updateByPrimaryKeySelective(LianjiaFangwuxx record);
 
     int updateByPrimaryKey(LianjiaFangwuxx record);
+    
+    List<LianjiaFangwuxx> getLianjiedz();
 }

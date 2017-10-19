@@ -17,7 +17,6 @@ import cn.zifangsky.model.LianjiaFangwuxx;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
-
 public class LianJiaSpider implements PageProcessor {
 	
 	private Site site = Site.me().setTimeOut(20000).setRetryTimes(3)
@@ -52,7 +51,7 @@ public class LianJiaSpider implements PageProcessor {
         Pattern pattern2 = Pattern.compile(URI+"/ershoufang/[a-z]+/$");
         Matcher matcher2 = pattern2.matcher(url);
         
-        Pattern pattern3 = Pattern.compile(URI+"/ershoufang/\\d+.html$");
+        Pattern pattern3 = Pattern.compile(URI+"/ershoufang/\\w+.html$");
         Matcher matcher3 = pattern3.matcher(url);
         
         //列表页面
@@ -62,7 +61,9 @@ public class LianJiaSpider implements PageProcessor {
             
             if(housePageUrls != null && housePageUrls.size() > 0){
                 //将当前列表页的所有房屋页面添加进去
-                page.addTargetRequests(housePageUrls);
+               
+            	 page.addTargetRequests(housePageUrls);
+               
             }
             
             //当前列表页中其它列表链接添加进去
@@ -70,12 +71,16 @@ public class LianJiaSpider implements PageProcessor {
             JSONObject json = JSON.parseObject(pages);
             if("1".equals(json.getInteger("curPage").toString())){//避免重复添加，只在第一次的时候添加
             	//各区的链接
-            	/*List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div/a/@href").all();
+            	List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div/a/@href").all();
                 
                 if(PageListUrls != null && PageListUrls.size() > 0){
                     //将当前列表页的所有房屋页面添加进去
-                    page.addTargetRequests(PageListUrls);
-                }*/
+                	 List<String> list = new ArrayList<String>();
+                     for (String purl : PageListUrls) {
+     					list.add(URI+purl);
+     				}
+                     page.addTargetRequests(list);
+                }
             	
             	
             	

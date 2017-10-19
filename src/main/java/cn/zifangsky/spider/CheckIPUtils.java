@@ -39,17 +39,18 @@ public class CheckIPUtils {
 	}
 	
 	
-	public static boolean checkLJValidIP(String ip,Integer port){
-		URL url = null;
+	public static boolean checkLJValidIP(String ip,Integer port,String testurl){
+		
 		HttpURLConnection connection = null;
 		try {
-			url = new URL("https://tj.lianjia.com/ershoufang");
+			URL url = new URL(testurl);
+			//url = new URL("https://tj.lianjia.com/ershoufang");
 			//代理服务器
 			InetSocketAddress proxyAddr = new InetSocketAddress(ip, port);
 			Proxy proxy = new Proxy(Proxy.Type.HTTP, proxyAddr);
 			connection = (HttpURLConnection) url.openConnection(proxy);
-			connection.setReadTimeout(4000);
-			connection.setConnectTimeout(4000);
+			connection.setReadTimeout(1000);
+			connection.setConnectTimeout(1000);
 			connection.setRequestMethod("GET");
 
 			if(connection.getResponseCode() == 200){

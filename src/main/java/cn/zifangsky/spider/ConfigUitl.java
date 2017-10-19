@@ -5,10 +5,12 @@ import java.util.List;
 
 public class ConfigUitl {
 	
+	private static List<String> linkList = new ArrayList<String>();
+	
 	public static List<String> getRegion(){
 		List<String> list = new ArrayList<String>();
-		list.add("heping");
-		list.add("nankai");
+		//list.add("heping");
+		//list.add("nankai");
 		list.add("hexi");
 		list.add("hebei");
 		list.add("hedong");
@@ -20,6 +22,14 @@ public class ConfigUitl {
 		list.add("tanggu");
 		list.add("kaifaqutj");
 		return list;
+	}
+	
+	public static List<String> getLink(){
+		return linkList;
+	}
+	
+	public static void setLink(List<String> list){
+		linkList.addAll(list);
 	}
 	
 

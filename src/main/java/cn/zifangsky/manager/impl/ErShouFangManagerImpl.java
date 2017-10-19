@@ -1,5 +1,8 @@
 package cn.zifangsky.manager.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +52,16 @@ public class ErShouFangManagerImpl implements ErShouFangManager {
 	@Override
 	public int updateByPrimaryKey(LianjiaFangwuxx record) {
 		return fangwuxx.updateByPrimaryKey(record);
+	}
+
+	@Override
+	public List<String> getLianjiedz() {
+		List<String> dzlist = new ArrayList<String>();
+		List<LianjiaFangwuxx> fwxxList = fangwuxx.getLianjiedz();
+		for (LianjiaFangwuxx lianjiaFangwuxx : fwxxList) {
+			dzlist.add(lianjiaFangwuxx.getLianjiedz());
+		}
+		return dzlist;
 	}
 
 }

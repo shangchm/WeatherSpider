@@ -1,5 +1,7 @@
 package cn.zifangsky.manager;
 
+import java.util.List;
+
 import cn.zifangsky.model.LianjiaFangwuxx;
 
 public interface ErShouFangManager {
@@ -15,5 +17,7 @@ public interface ErShouFangManager {
     int updateByPrimaryKeySelective(LianjiaFangwuxx record);
 
     int updateByPrimaryKey(LianjiaFangwuxx record);
+    
+    List<String> getLianjiedz();
 
 }

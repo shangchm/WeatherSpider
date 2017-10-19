@@ -1,7 +1,6 @@
 package cn.zifangsky.spider;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,27 +10,32 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Component;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import cn.zifangsky.manager.ErShouFangManager;
 import cn.zifangsky.model.LianjiaFangwuxx;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
 
+@Component("lianJiaCJSpider")
 public class LianJiaCJSpider implements PageProcessor {
+	
 	
 	private Site site = Site.me().setTimeOut(20000).setRetryTimes(3)
 			.setSleepTime(5000).setCharset("UTF-8");
 	
-	private  String URI;
 	
-	private  String CSDM;
 	
-	public LianJiaCJSpider(String csdm){
-		CSDM = csdm;
-		URI = "https://"+CSDM+".lianjia.com";
-	}
+	private  String URI = "https://tj.lianjia.com";;
+	
+	
+	
 	
 	@Override
 	public Site getSite() {
@@ -45,7 +49,8 @@ public class LianJiaCJSpider implements PageProcessor {
 	
 	@Override
     public void process(Page page) {
-				
+		List<String> urlList = ConfigUitl.getLink();
+		System.out.println("已有链接个数："+urlList.size());
         String url =  page.getUrl().toString();
         Pattern pattern1 = Pattern.compile(URI+"/chengjiao/[a-z]+/pg(\\d*)?");
         Matcher matcher1 = pattern1.matcher(url);
@@ -53,8 +58,9 @@ public class LianJiaCJSpider implements PageProcessor {
         Pattern pattern2 = Pattern.compile(URI+"/chengjiao/[a-z]+/$");
         Matcher matcher2 = pattern2.matcher(url);
         
-        Pattern pattern3 = Pattern.compile(URI+"/chengjiao/\\d+.html$");
+        Pattern pattern3 = Pattern.compile(URI+"/chengjiao/\\w+.html$");
         Matcher matcher3 = pattern3.matcher(url);
+        
         
         //列表页面
         if(matcher1.find()){
@@ -63,7 +69,15 @@ public class LianJiaCJSpider implements PageProcessor {
             
             if(housePageUrls != null && housePageUrls.size() > 0){
                 //将当前列表页的所有房屋页面添加进去
-                page.addTargetRequests(housePageUrls);
+                 
+                 List<String> list = new ArrayList<String>();
+                 for (String purl : housePageUrls) {
+                	 if(!urlList.contains(purl)){
+ 					   list.add(purl);
+ 					   urlList.add(purl);
+                	 }
+ 				}
+                 page.addTargetRequests(list);
             }
             
             //当前列表页中其它列表链接添加进去
@@ -75,8 +89,13 @@ public class LianJiaCJSpider implements PageProcessor {
                 
                 if(PageListUrls != null && PageListUrls.size() > 0){
                     //将当前列表页的所有房屋页面添加进去
-                    page.addTargetRequests(PageListUrls);
-                }*/
+                 
+                    List<String> list = new ArrayList<String>();
+                    for (String purl : PageListUrls) {
+    					list.add(URI+purl);
+    				}
+                    page.addTargetRequests(list);
+                 }*/
             	
             	
             	
@@ -88,7 +107,7 @@ public class LianJiaCJSpider implements PageProcessor {
 					listUrls.add(url.substring(0,url.indexOf("pg")+2)+i);
 				}
             	System.out.println(listUrls);
-            	 page.addTargetRequests(listUrls);
+                page.addTargetRequests(listUrls);
             } 
         }else if(matcher3.find()){  //房屋页面   
         	
@@ -184,11 +203,12 @@ public class LianJiaCJSpider implements PageProcessor {
            
             
             fw.setFangwubh(fangwubh);
-            if(zongjia!=null&&!"暂无数据".equals(zongjia))
-            fw.setZongjia(Integer.parseInt(zongjia.trim()));
-            fw.setDanjia((int)Math.round(fw.getZongjia()*10000/Double.parseDouble(jianzhumj.trim().replaceAll("㎡", ""))));
+            if(zongjia!=null&&!"暂无数据".equals(zongjia)){
+	            fw.setZongjia((int)Math.round(Double.parseDouble(zongjia.trim())));
+	            fw.setDanjia((int)Math.round(fw.getZongjia()*10000/Double.parseDouble(jianzhumj.trim().replaceAll("㎡", ""))));
+            }
             fw.setXiaoqumc(xiaoqumc);
-            fw.setSuozaics(CSDM);
+            fw.setSuozaics("tj");
             fw.setSuozaiq(suozaiq);
             fw.setSuozaisq(suozaisq);
             fw.setSuozaidtxl(suozaidtxl);
@@ -233,8 +253,8 @@ public class LianJiaCJSpider implements PageProcessor {
             if(chenjiaozj!=null)
             fw.setChengjiaozj((int)Math.round(Double.parseDouble(chenjiaozj)));
             fw.setChengjiaosj(chengjiaosj);
-            if(chenjiaozq!=null)
-            fw.setChengjiaozq(Integer.parseInt(chenjiaozq));
+            if(chenjiaozq!=null&&!"暂无数据".equals(chenjiaozq.trim()))
+            fw.setChengjiaozq((int)Math.round(Double.parseDouble(chenjiaozq)));
             
             page.putField("fangwuxx", fw);  //后面做数据的持久化
             
@@ -260,7 +280,7 @@ public class LianJiaCJSpider implements PageProcessor {
 	
 	public static void main(String[] args) {
 		
-		  String url = "https://tj.lianjia.com/chengjiao/101101878810.html";
+		  String url = "https://tj.lianjia.com/chengjiao/TJHP89499832.html";
 		  
 		    Pattern pattern1 = Pattern.compile("https://tj.lianjia.com/chengjiao/[a-z]+/pg(\\d*)?");
 	        Matcher matcher1 = pattern1.matcher(url);
@@ -271,7 +291,7 @@ public class LianJiaCJSpider implements PageProcessor {
 	        Matcher matcher2 = pattern2.matcher(url);
 	        System.out.println(matcher2.find());
 	        
-	        Pattern pattern3= Pattern.compile("/chengjiao/\\d+.html$");
+	        Pattern pattern3= Pattern.compile("/chengjiao/\\w+.html$");
 	        Matcher matcher3 = pattern3.matcher(url);
 	        System.out.println(matcher3.find());
 	        
