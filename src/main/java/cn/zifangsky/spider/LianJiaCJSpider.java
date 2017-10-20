@@ -28,7 +28,7 @@ public class LianJiaCJSpider implements PageProcessor {
 	
 	
 	private Site site = Site.me().setTimeOut(20000).setRetryTimes(3)
-			.setSleepTime(5000).setCharset("UTF-8");
+			.setSleepTime(10000).setCharset("UTF-8");
 	
 	
 	
@@ -63,7 +63,7 @@ public class LianJiaCJSpider implements PageProcessor {
         
         
         //列表页面
-        if(matcher1.find()){
+        if(matcher1.find()||matcher2.find()){
             //详情页URL集合
             List<String> housePageUrls = page.getHtml().xpath("//li/a[@class='img']/@href").all();
             
@@ -82,10 +82,11 @@ public class LianJiaCJSpider implements PageProcessor {
             
             //当前列表页中其它列表链接添加进去
             String pages =  page.getHtml().xpath("//div[@class='page-box house-lst-page-box']/@page-data").toString();
+            String pageurl =  page.getHtml().xpath("//div[@class='page-box house-lst-page-box']/@page-url").toString();
             JSONObject json = JSON.parseObject(pages);
             if("1".equals(json.getInteger("curPage").toString())){//避免重复添加，只在第一次的时候添加
             	//各区的链接
-            	/*List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div/a/@href").all();
+            	List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div[2]/a/@href").all();
                 
                 if(PageListUrls != null && PageListUrls.size() > 0){
                     //将当前列表页的所有房屋页面添加进去
@@ -95,7 +96,7 @@ public class LianJiaCJSpider implements PageProcessor {
     					list.add(URI+purl);
     				}
                     page.addTargetRequests(list);
-                 }*/
+                 }
             	
             	
             	
@@ -104,7 +105,7 @@ public class LianJiaCJSpider implements PageProcessor {
             	 List<String> listUrls = new ArrayList<String>();
             	for (int i = 0 ;i<size;i++) {
             		i++;
-					listUrls.add(url.substring(0,url.indexOf("pg")+2)+i);
+					listUrls.add(URI+pageurl.substring(0,pageurl.indexOf("pg")+2)+i);
 				}
             	System.out.println(listUrls);
                 page.addTargetRequests(listUrls);

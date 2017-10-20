@@ -20,6 +20,7 @@ import cn.zifangsky.spider.LianjianCJPipeline;
 import cn.zifangsky.spider.LianjianPipeline;
 import cn.zifangsky.spider.MyProxyProvider;
 import cn.zifangsky.spider.ProxyIPPipeline;
+import cn.zifangsky.spider.ProxyIPSpider;
 import cn.zifangsky.spider.WeatherSpider;
 import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.model.OOSpider;
@@ -76,9 +77,9 @@ public class CrawlManagerImpl implements CrawlManager {
 	public void houseCrawlCJ(String csdm,String qydm) {
 	     
 		ConfigUitl.setLink(erShouFangManager.getLianjiedz());
-		HttpClientDownloader httpClientDownloader = proxyDownloader("https://tj.lianjia.com/chengjiao");
+		//HttpClientDownloader httpClientDownloader = proxyDownloader("https://tj.lianjia.com/chengjiao");
 		OOSpider.create(lianJiaCJSpider)
-		.setDownloader(httpClientDownloader)
+		//.setDownloader(httpClientDownloader)
 		//--------使用代理池--end-------
 		.addUrl("https://"+csdm+".lianjia.com/chengjiao/"+qydm+"/pg1")
 		.addPipeline(lianjianCJPipeline)
