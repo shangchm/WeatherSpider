@@ -492,4 +492,8 @@
       SHIFOUXZ = #{shifouxz,jdbcType=VARCHAR}
     where FANGWUBH = #{fangwubh,jdbcType=VARCHAR}
   </update>
+  
+   <select id="getLianjiedz" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" />  from lianjia_fangwuxx where shifoucj='1'
+	</select>
 </mapper>
