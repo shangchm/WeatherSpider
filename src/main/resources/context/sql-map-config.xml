@@ -25,5 +25,9 @@
 		<mapper resource="sqlmaps/WeatherStationMapper.xml" />
 		<mapper resource="sqlmaps/WeatherWeatherMapper.xml" />
 		<mapper resource="sqlmaps/ProxyIpMapper.xml" />
+		<mapper resource="sqlmaps/LianjiaDaikanfwMapper.xml" />
+		<mapper resource="sqlmaps/LianjiaFangwuxxMapper.xml" />
+		<mapper resource="sqlmaps/LianjiaTiaojiafwMapper.xml" />
+		<mapper resource="sqlmaps/LianjiaXiaoquxxMapper.xml" />
 	</mappers>
 </configuration>
