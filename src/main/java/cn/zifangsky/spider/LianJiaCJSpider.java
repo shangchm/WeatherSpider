@@ -84,7 +84,7 @@ public class LianJiaCJSpider implements PageProcessor {
             String pages =  page.getHtml().xpath("//div[@class='page-box house-lst-page-box']/@page-data").toString();
             String pageurl =  page.getHtml().xpath("//div[@class='page-box house-lst-page-box']/@page-url").toString();
             JSONObject json = JSON.parseObject(pages);
-            if("1".equals(json.getInteger("curPage").toString())){//避免重复添加，只在第一次的时候添加
+            if(json!=null&&"1".equals(json.getInteger("curPage").toString())){//避免重复添加，只在第一次的时候添加
             	//各区的链接
             	List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div[2]/a/@href").all();
                 
@@ -101,13 +101,15 @@ public class LianJiaCJSpider implements PageProcessor {
             	
             	
             	//翻页连接
-            	int size = json.getIntValue("totalPage");
-            	 List<String> listUrls = new ArrayList<String>();
-            	for (int i = 1 ;i<=size;i++) {
-					listUrls.add(URI+pageurl.substring(0,pageurl.indexOf("pg")+2)+i);
+				if (!ConfigUitl.linkContains(url)) {
+					int size = json.getIntValue("totalPage");
+					List<String> listUrls = new ArrayList<String>();
+					for (int i = 1; i <= size; i++) {
+						listUrls.add(URI + pageurl.replace("{page}", String.valueOf(i)));
+					}
+					System.out.println(listUrls);
+					page.addTargetRequests(listUrls);
 				}
-            	System.out.println(listUrls);
-                page.addTargetRequests(listUrls);
             } 
         }else if(matcher3.find()){  //房屋页面   
         	

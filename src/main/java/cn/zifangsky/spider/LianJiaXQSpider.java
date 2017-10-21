@@ -115,7 +115,7 @@ public class LianJiaXQSpider implements PageProcessor {
             String pages =  page.getHtml().xpath("//div[@class='page-box house-lst-page-box']/@page-data").toString();
             String pageurl =  page.getHtml().xpath("//div[@class='page-box house-lst-page-box']/@page-url").toString();
             JSONObject json = JSON.parseObject(pages);
-            if("1".equals(json.getInteger("curPage").toString())){//避免重复添加，只在第一次的时候添加
+            if(json!=null&&"1".equals(json.getInteger("curPage").toString())){//避免重复添加，只在第一次的时候添加
             	//各区的链接
             	List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div[2]/a/@href").all();
                 
