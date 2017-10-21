@@ -4,7 +4,7 @@ import java.util.List;
 
 import cn.zifangsky.model.LianjiaFangwuxx;
 
-public interface ErShouFangManager {
+public interface LJFangManager {
 	
 	int deleteByPrimaryKey(String fangwubh);
 

@@ -71,7 +71,7 @@ public class LianJiaSpider implements PageProcessor {
             JSONObject json = JSON.parseObject(pages);
             if("1".equals(json.getInteger("curPage").toString())){//避免重复添加，只在第一次的时候添加
             	//各区的链接
-            	/*List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div/a/@href").all();
+            	List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div[2]/a/@href").all();
                 
                 if(PageListUrls != null && PageListUrls.size() > 0){
                     //将当前列表页的所有房屋页面添加进去
@@ -80,15 +80,14 @@ public class LianJiaSpider implements PageProcessor {
      					list.add(URI+purl);
      				}
                      page.addTargetRequests(list);
-                }*/
+                }
             	
             	
             	
             	//翻页连接
             	int size = json.getIntValue("totalPage");
             	 List<String> listUrls = new ArrayList<String>();
-            	for (int i = 0 ;i<size;i++) {
-            		i++;
+            	for (int i = 1 ;i<=size;i++) {
 					listUrls.add(url.substring(0,url.indexOf("pg")+2)+i);
 				}
             	System.out.println(listUrls);

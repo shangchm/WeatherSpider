@@ -1,6 +1,8 @@
 package cn.zifangsky.spider;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ConfigUitl {
@@ -9,11 +11,9 @@ public class ConfigUitl {
 	
 	public static List<String> getRegion(){
 		List<String> list = new ArrayList<String>();
-		//list.add("heping");
-		//list.add("kaifaqutj");
-		//list.add("nankai");
-		
-		
+		list.add("heping");
+		list.add("kaifaqutj");
+		list.add("nankai");
 		list.add("xiqing");
 		list.add("beichen");
 		list.add("dongli");
@@ -27,12 +27,30 @@ public class ConfigUitl {
 		return list;
 	}
 	
+	public static boolean linkContains(String url){
+		boolean ok = false;
+		List<String> list = getRegion();
+		for (String s : list) {
+			if(url.indexOf(s)!=-1){
+				ok =true;
+				break;
+			}
+		}
+		return ok;
+	}
+	
 	public static List<String> getLink(){
 		return linkList;
 	}
 	
 	public static void setLink(List<String> list){
 		linkList.addAll(list);
+	}
+	
+	
+	public static String getDate(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		return sdf.format(new Date());
 	}
 	
 

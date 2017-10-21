@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import cn.zifangsky.manager.CrawlManager;
-import cn.zifangsky.manager.ErShouFangManager;
+import cn.zifangsky.manager.LJFangManager;
 import cn.zifangsky.manager.ProxyIpManager;
 import cn.zifangsky.model.ProxyIp;
 import cn.zifangsky.spider.CheckIPUtils;
@@ -16,11 +16,12 @@ import cn.zifangsky.spider.ConfigUitl;
 import cn.zifangsky.spider.CustomPipeline;
 import cn.zifangsky.spider.LianJiaCJSpider;
 import cn.zifangsky.spider.LianJiaSpider;
+import cn.zifangsky.spider.LianJiaXQSpider;
 import cn.zifangsky.spider.LianjianCJPipeline;
 import cn.zifangsky.spider.LianjianPipeline;
+import cn.zifangsky.spider.LianjianXQPipeline;
 import cn.zifangsky.spider.MyProxyProvider;
 import cn.zifangsky.spider.ProxyIPPipeline;
-import cn.zifangsky.spider.ProxyIPSpider;
 import cn.zifangsky.spider.WeatherSpider;
 import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.model.OOSpider;
@@ -47,8 +48,14 @@ public class CrawlManagerImpl implements CrawlManager {
 	@Resource(name="lianJiaCJSpider")
 	private LianJiaCJSpider lianJiaCJSpider;
 	
+	@Resource(name="lianJiaXQSpider")
+	private LianJiaXQSpider lianJiaXQSpider;
+	
+	@Resource(name="lianjianXQPipeline")
+	private LianjianXQPipeline lianjianXQPipeline;
+	
 	@Resource(name="erShouFangManager")
-	private ErShouFangManager erShouFangManager;
+	private LJFangManager erShouFangManager;
 
 	
 	@Override
@@ -87,7 +94,17 @@ public class CrawlManagerImpl implements CrawlManager {
 		.run();
 	}
 
-	
+	@Override
+	public void houseCrawlXQ(String csdm, String qydm) {
+		OOSpider.create(lianJiaXQSpider)
+		//.setDownloader(httpClientDownloader)
+		//--------使用代理池--end-------
+		.addUrl("https://"+csdm+".lianjia.com/xiaoqu/"+qydm+"/pg1")
+		.addPipeline(lianjianXQPipeline)
+		.thread(5)
+		.run();
+		
+	}
 
 	@Override
 	public void proxyIPCrawl() {
@@ -142,4 +159,6 @@ public class CrawlManagerImpl implements CrawlManager {
 		httpClientDownloader.setProxyProvider(proxyProvider);
 		return httpClientDownloader;
 	}
+
+	
 }

@@ -21,7 +21,11 @@ public interface CrawlManager {
 	 */
 	public void houseCrawlCJ(String csdm,String qydm);
 	
-	
+	/**
+	 * 房屋爬虫
+	 * @param station 城区
+	 */
+	public void houseCrawlXQ(String csdm,String qydm);
 	
 	/**
 	 * 代理IP爬虫，地址：http://www.xicidaili.com

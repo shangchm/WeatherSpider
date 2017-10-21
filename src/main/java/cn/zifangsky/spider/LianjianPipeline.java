@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import cn.zifangsky.manager.ErShouFangManager;
+import cn.zifangsky.manager.LJFangManager;
 import cn.zifangsky.model.LianjiaFangwuxx;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
@@ -20,7 +20,7 @@ public class LianjianPipeline implements Pipeline {
 	
 	
 	@Resource(name="erShouFangManager")
-	private ErShouFangManager erShouFangManager;
+	private LJFangManager erShouFangManager;
 	
 	
 	/**

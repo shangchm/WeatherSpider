@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-import cn.zifangsky.manager.ErShouFangManager;
+import cn.zifangsky.manager.LJFangManager;
 import cn.zifangsky.model.LianjiaFangwuxx;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -103,8 +103,7 @@ public class LianJiaCJSpider implements PageProcessor {
             	//翻页连接
             	int size = json.getIntValue("totalPage");
             	 List<String> listUrls = new ArrayList<String>();
-            	for (int i = 0 ;i<size;i++) {
-            		i++;
+            	for (int i = 1 ;i<=size;i++) {
 					listUrls.add(URI+pageurl.substring(0,pageurl.indexOf("pg")+2)+i);
 				}
             	System.out.println(listUrls);

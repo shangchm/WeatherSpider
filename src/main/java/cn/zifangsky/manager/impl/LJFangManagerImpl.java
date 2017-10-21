@@ -6,14 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cn.zifangsky.manager.ErShouFangManager;
+import cn.zifangsky.manager.LJFangManager;
 import cn.zifangsky.mapper.LianjiaDaikanfwMapper;
 import cn.zifangsky.mapper.LianjiaFangwuxxMapper;
 import cn.zifangsky.mapper.LianjiaTiaojiafwMapper;
 import cn.zifangsky.model.LianjiaFangwuxx;
 
 @Service("erShouFangManager")
-public class ErShouFangManagerImpl implements ErShouFangManager {
+public class LJFangManagerImpl implements LJFangManager {
 
 	@Autowired
 	private LianjiaDaikanfwMapper  daikanfw;

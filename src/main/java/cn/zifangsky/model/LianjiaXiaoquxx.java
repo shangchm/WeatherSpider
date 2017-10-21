@@ -25,6 +25,8 @@ public class LianjiaXiaoquxx {
 
     private String gengxinrq;
 
+    private String lianjiedz;
+
     public String getXiaoqubm() {
         return xiaoqubm;
     }
@@ -119,5 +121,13 @@ public class LianjiaXiaoquxx {
 
     public void setGengxinrq(String gengxinrq) {
         this.gengxinrq = gengxinrq == null ? null : gengxinrq.trim();
+    }
+
+    public String getLianjiedz() {
+        return lianjiedz;
+    }
+
+    public void setLianjiedz(String lianjiedz) {
+        this.lianjiedz = lianjiedz == null ? null : lianjiedz.trim();
     }
 }
