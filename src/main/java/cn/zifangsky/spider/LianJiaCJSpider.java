@@ -10,14 +10,11 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-import cn.zifangsky.manager.LJFangManager;
 import cn.zifangsky.model.LianjiaFangwuxx;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -27,14 +24,14 @@ import us.codecraft.webmagic.processor.PageProcessor;
 public class LianJiaCJSpider implements PageProcessor {
 	
 	
-	private Site site = Site.me().setTimeOut(20000).setRetryTimes(3)
+	private Site site = Site.me().setTimeOut(30000).setRetryTimes(5)
 			.setSleepTime(10000).setCharset("UTF-8");
 	
 	
 	
 	private  String URI = "https://tj.lianjia.com";;
 	
-	
+	private Set<String> set = new HashSet<String>();
 	
 	
 	@Override
@@ -49,8 +46,9 @@ public class LianJiaCJSpider implements PageProcessor {
 	
 	@Override
     public void process(Page page) {
-		List<String> urlList = ConfigUitl.getLink();
-		System.out.println("已有链接个数："+urlList.size());
+		List<String> urlList1 = ConfigUitl.getLink();
+		set.addAll(urlList1);
+		System.out.println("已有链接个数："+set.size());
         String url =  page.getUrl().toString();
         Pattern pattern1 = Pattern.compile(URI+"/chengjiao/[a-z]+/pg(\\d*)?");
         Matcher matcher1 = pattern1.matcher(url);
@@ -72,9 +70,9 @@ public class LianJiaCJSpider implements PageProcessor {
                  
                  List<String> list = new ArrayList<String>();
                  for (String purl : housePageUrls) {
-                	 if(!urlList.contains(purl)){
+                	 if(!set.contains(purl)){
  					   list.add(purl);
- 					   urlList.add(purl);
+ 					   set.add(purl);
                 	 }
  				}
                  page.addTargetRequests(list);
