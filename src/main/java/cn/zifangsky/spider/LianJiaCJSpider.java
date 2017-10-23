@@ -19,6 +19,7 @@ import cn.zifangsky.model.LianjiaFangwuxx;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.selector.JsonPathSelector;
 
 @Component("lianJiaCJSpider")
 public class LianJiaCJSpider implements PageProcessor {
@@ -110,6 +111,7 @@ public class LianJiaCJSpider implements PageProcessor {
 				}
             } 
         }else if(matcher3.find()){  //房屋页面   
+        	
         	
         	//编号
         	String fangwubh = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[1]/text()").toString();

@@ -69,9 +69,9 @@ public class CrawlManagerImpl implements CrawlManager {
 	
 	@Override
 	public void houseCrawl(String csdm,String qydm) {
-		HttpClientDownloader httpClientDownloader = proxyDownloader("https://tj.lianjia.com/ershoufang");
+		//HttpClientDownloader httpClientDownloader = proxyDownloader("https://tj.lianjia.com/ershoufang");
 		OOSpider.create(new LianJiaSpider(csdm))
-		.setDownloader(httpClientDownloader)
+		//.setDownloader(httpClientDownloader)
 		//--------使用代理池--end-------
 		.addUrl("https://"+csdm+".lianjia.com/ershoufang/"+qydm+"/pg1")
 		.addPipeline(lianjianPipeline)

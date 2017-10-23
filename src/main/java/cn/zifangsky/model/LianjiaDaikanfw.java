@@ -11,6 +11,8 @@ public class LianjiaDaikanfw {
 
     private String caozuosj;
 
+    private String dailir;
+
     public Integer getId() {
         return id;
     }
@@ -49,5 +51,13 @@ public class LianjiaDaikanfw {
 
     public void setCaozuosj(String caozuosj) {
         this.caozuosj = caozuosj == null ? null : caozuosj.trim();
+    }
+
+    public String getDailir() {
+        return dailir;
+    }
+
+    public void setDailir(String dailir) {
+        this.dailir = dailir == null ? null : dailir.trim();
     }
 }

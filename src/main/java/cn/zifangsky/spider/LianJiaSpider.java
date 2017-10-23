@@ -13,10 +13,13 @@ import java.util.regex.Pattern;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import cn.zifangsky.model.LianjiaDaikanfw;
 import cn.zifangsky.model.LianjiaFangwuxx;
 import us.codecraft.webmagic.Page;
+import us.codecraft.webmagic.SimpleHttpClient;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.selector.JsonPathSelector;
 public class LianJiaSpider implements PageProcessor {
 	
 	private Site site = Site.me().setTimeOut(20000).setRetryTimes(3)
@@ -98,6 +101,9 @@ public class LianJiaSpider implements PageProcessor {
             } 
         }else if(matcher3.find()){  //房屋页面   
         	LianjiaFangwuxx fw = new LianjiaFangwuxx();
+        	
+        	
+        	
         	//编号
         	String fangwubh = page.getHtml().xpath("//div[@class='houseRecord']/span[@class='info']/text()").toString();
         	//单价
@@ -250,7 +256,21 @@ public class LianJiaSpider implements PageProcessor {
             fw.setLianjiedz(url);
             fw.setShifoucj("0");
             
-            
+            SimpleHttpClient simplehttp = new SimpleHttpClient(); 
+            Page jsonpage = simplehttp.get("https://tj.lianjia.com/ershoufang/houseseerecord?id="+fw.getFangwubh());
+            List<String> ids = new JsonPathSelector("$.data.seeRecord").selectList(jsonpage.getRawText());
+            List<LianjiaDaikanfw>  dkfwList = new ArrayList<LianjiaDaikanfw>();
+            for (String dkxx : ids) {
+            	 LianjiaDaikanfw dkfw = new  LianjiaDaikanfw();
+            	 JSONObject json = JSON.parseObject(dkxx);
+            	 dkfw.setFangwubh(fangwubh);
+            	 dkfw.setDaikansj(json.getString("seeTime").replaceAll("-", ""));
+            	 dkfw.setDaikancs(json.getInteger("seeCnt"));
+            	 dkfw.setCaozuosj(ConfigUitl.getDate());
+            	 dkfw.setDailir(json.getString("agentId"));
+            	 dkfwList.add(dkfw);
+			} 
+            page.putField("dkfwList", dkfwList);
             page.putField("fangwuxx", fw);  //后面做数据的持久化
         }    
     }

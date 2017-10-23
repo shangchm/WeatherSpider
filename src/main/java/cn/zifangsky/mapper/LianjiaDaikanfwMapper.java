@@ -14,4 +14,6 @@ public interface LianjiaDaikanfwMapper {
     int updateByPrimaryKeySelective(LianjiaDaikanfw record);
 
     int updateByPrimaryKey(LianjiaDaikanfw record);
+    
+    LianjiaDaikanfw selectOne(LianjiaDaikanfw record);
 }

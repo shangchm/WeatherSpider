@@ -10,7 +10,9 @@ import cn.zifangsky.manager.LJFangManager;
 import cn.zifangsky.mapper.LianjiaDaikanfwMapper;
 import cn.zifangsky.mapper.LianjiaFangwuxxMapper;
 import cn.zifangsky.mapper.LianjiaTiaojiafwMapper;
+import cn.zifangsky.model.LianjiaDaikanfw;
 import cn.zifangsky.model.LianjiaFangwuxx;
+import cn.zifangsky.model.LianjiaTiaojiafw;
 
 @Service("erShouFangManager")
 public class LJFangManagerImpl implements LJFangManager {
@@ -62,6 +64,28 @@ public class LJFangManagerImpl implements LJFangManager {
 			dzlist.add(lianjiaFangwuxx.getLianjiedz());
 		}
 		return dzlist;
+	}
+
+	@Override
+	public void updateDaikanxx(List<LianjiaDaikanfw> daikanList) {
+		for (LianjiaDaikanfw daikanxx : daikanList) {
+
+			LianjiaDaikanfw oldxq = daikanfw.selectOne(daikanxx);
+			if (oldxq != null) {
+				//什么也不做
+				//System.out.println("已有带看记录："+oldxq.getId());
+			} else {
+				//System.out.println("新增带看记录："+daikanxx.getId());
+				daikanfw.insertSelective(daikanxx);
+			}
+		}
+
+	}
+
+	@Override
+	public void insertTiaojiaxx(LianjiaTiaojiafw tiaojiaxx) {
+		System.out.println("新增调价记录成功："+tiaojiaxx.getFangwubh()+" "+tiaojiaxx.getTiaojialx());
+		tiaojiaofw.insertSelective(tiaojiaxx);
 	}
 
 }
