@@ -14,10 +14,11 @@
     <result column="CHUZHUTS" property="chuzhuts" jdbcType="DECIMAL" />
     <result column="JINQICJTS" property="jinqicjts" jdbcType="DECIMAL" />
     <result column="GENGXINRQ" property="gengxinrq" jdbcType="CHAR" />
+    <result column="LIANJIEDZ" property="lianjiedz" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     XIAOQUBM, XIAOQUMC, SUOZAICS, SUOZAICQ, SUOZAISQ, DITIEXX, SHIFOUXQ, XUEQUXX, ZAISHOUTS, 
-    CHUZHUTS, JINQICJTS, GENGXINRQ
+    CHUZHUTS, JINQICJTS, GENGXINRQ, LIANJIEDZ
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -33,13 +34,13 @@
     insert into lianjia_xiaoquxx (XIAOQUBM, XIAOQUMC, SUOZAICS, 
       SUOZAICQ, SUOZAISQ, DITIEXX, 
       SHIFOUXQ, XUEQUXX, ZAISHOUTS, 
-      CHUZHUTS, JINQICJTS, GENGXINRQ
-      )
+      CHUZHUTS, JINQICJTS, GENGXINRQ, 
+      LIANJIEDZ)
     values (#{xiaoqubm,jdbcType=VARCHAR}, #{xiaoqumc,jdbcType=VARCHAR}, #{suozaics,jdbcType=VARCHAR}, 
       #{suozaicq,jdbcType=VARCHAR}, #{suozaisq,jdbcType=VARCHAR}, #{ditiexx,jdbcType=VARCHAR}, 
       #{shifouxq,jdbcType=VARCHAR}, #{xuequxx,jdbcType=VARCHAR}, #{zaishouts,jdbcType=DECIMAL}, 
-      #{chuzhuts,jdbcType=DECIMAL}, #{jinqicjts,jdbcType=DECIMAL}, #{gengxinrq,jdbcType=CHAR}
-      )
+      #{chuzhuts,jdbcType=DECIMAL}, #{jinqicjts,jdbcType=DECIMAL}, #{gengxinrq,jdbcType=CHAR}, 
+      #{lianjiedz,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.zifangsky.model.LianjiaXiaoquxx" >
     insert into lianjia_xiaoquxx
@@ -80,6 +81,9 @@
       <if test="gengxinrq != null" >
         GENGXINRQ,
       </if>
+      <if test="lianjiedz != null" >
+        LIANJIEDZ,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="xiaoqubm != null" >
@@ -117,6 +121,9 @@
       </if>
       <if test="gengxinrq != null" >
         #{gengxinrq,jdbcType=CHAR},
+      </if>
+      <if test="lianjiedz != null" >
+        #{lianjiedz,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -156,6 +163,9 @@
       <if test="gengxinrq != null" >
         GENGXINRQ = #{gengxinrq,jdbcType=CHAR},
       </if>
+      <if test="lianjiedz != null" >
+        LIANJIEDZ = #{lianjiedz,jdbcType=VARCHAR},
+      </if>
     </set>
     where XIAOQUBM = #{xiaoqubm,jdbcType=VARCHAR}
   </update>
@@ -171,7 +181,8 @@
       ZAISHOUTS = #{zaishouts,jdbcType=DECIMAL},
       CHUZHUTS = #{chuzhuts,jdbcType=DECIMAL},
       JINQICJTS = #{jinqicjts,jdbcType=DECIMAL},
-      GENGXINRQ = #{gengxinrq,jdbcType=CHAR}
+      GENGXINRQ = #{gengxinrq,jdbcType=CHAR},
+      LIANJIEDZ = #{lianjiedz,jdbcType=VARCHAR}
     where XIAOQUBM = #{xiaoqubm,jdbcType=VARCHAR}
   </update>
 </mapper>

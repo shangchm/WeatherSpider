@@ -7,9 +7,10 @@
     <result column="DAIKANSJ" property="daikansj" jdbcType="CHAR" />
     <result column="DAIKANCS" property="daikancs" jdbcType="DECIMAL" />
     <result column="CAOZUOSJ" property="caozuosj" jdbcType="CHAR" />
+    <result column="DAILIR" property="dailir" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, FANGWUBH, DAIKANSJ, DAIKANCS, CAOZUOSJ
+    ID, FANGWUBH, DAIKANSJ, DAIKANCS, CAOZUOSJ, DAILIR
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -17,15 +18,25 @@
     from lianjia_daikanfw
     where ID = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectOne" resultMap="BaseResultMap" parameterType="cn.zifangsky.model.LianjiaDaikanfw" >
+    select 
+    <include refid="Base_Column_List" />
+    from lianjia_daikanfw
+    where  DAILIR = #{dailir,jdbcType=VARCHAR} and  DAIKANSJ = #{daikansj,jdbcType=CHAR} and FANGWUBH = #{fangwubh,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from lianjia_daikanfw
     where ID = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.zifangsky.model.LianjiaDaikanfw" >
     insert into lianjia_daikanfw (ID, FANGWUBH, DAIKANSJ, 
-      DAIKANCS, CAOZUOSJ)
+      DAIKANCS, CAOZUOSJ, DAILIR
+      )
     values (#{id,jdbcType=INTEGER}, #{fangwubh,jdbcType=VARCHAR}, #{daikansj,jdbcType=CHAR}, 
-      #{daikancs,jdbcType=DECIMAL}, #{caozuosj,jdbcType=CHAR})
+      #{daikancs,jdbcType=DECIMAL}, #{caozuosj,jdbcType=CHAR}, #{dailir,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.zifangsky.model.LianjiaDaikanfw" >
     insert into lianjia_daikanfw
@@ -45,6 +56,9 @@
       <if test="caozuosj != null" >
         CAOZUOSJ,
       </if>
+      <if test="dailir != null" >
+        DAILIR,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -61,6 +75,9 @@
       </if>
       <if test="caozuosj != null" >
         #{caozuosj,jdbcType=CHAR},
+      </if>
+      <if test="dailir != null" >
+        #{dailir,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -79,6 +96,9 @@
       <if test="caozuosj != null" >
         CAOZUOSJ = #{caozuosj,jdbcType=CHAR},
       </if>
+      <if test="dailir != null" >
+        DAILIR = #{dailir,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{id,jdbcType=INTEGER}
   </update>
@@ -87,7 +107,8 @@
     set FANGWUBH = #{fangwubh,jdbcType=VARCHAR},
       DAIKANSJ = #{daikansj,jdbcType=CHAR},
       DAIKANCS = #{daikancs,jdbcType=DECIMAL},
-      CAOZUOSJ = #{caozuosj,jdbcType=CHAR}
+      CAOZUOSJ = #{caozuosj,jdbcType=CHAR},
+      DAILIR = #{dailir,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
