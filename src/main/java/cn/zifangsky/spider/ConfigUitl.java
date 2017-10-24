@@ -4,10 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class ConfigUitl {
 	
-	private static List<String> linkList = new ArrayList<String>();
+	private static Set<String> cjSet = new TreeSet<String>();
+	
+	private static Set<String> wcjSet =  new TreeSet<String>();
 	
 	public static List<String> getRegion(){
 		List<String> list = new ArrayList<String>();
@@ -39,12 +43,22 @@ public class ConfigUitl {
 		return ok;
 	}
 	
-	public static List<String> getLink(){
-		return linkList;
+	public static Set<String> getCJLink(){
+		return cjSet;
 	}
 	
-	public static void setLink(List<String> list){
-		linkList.addAll(list);
+	public static void setCJLink(List<String> list){
+		cjSet.addAll(list);
+	}
+	
+	
+	
+	public static Set<String> getWCJLink(){
+		return wcjSet;
+	}
+	
+	public static void setWCJLink(List<String> list){
+		wcjSet.addAll(list);
 	}
 	
 	

@@ -22,6 +22,7 @@ import cn.zifangsky.spider.LianjianPipeline;
 import cn.zifangsky.spider.LianjianXQPipeline;
 import cn.zifangsky.spider.MyProxyProvider;
 import cn.zifangsky.spider.ProxyIPPipeline;
+import cn.zifangsky.spider.ProxyIPSpider;
 import cn.zifangsky.spider.WeatherSpider;
 import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.model.OOSpider;
@@ -69,9 +70,10 @@ public class CrawlManagerImpl implements CrawlManager {
 	
 	@Override
 	public void houseCrawl(String csdm,String qydm) {
-		//HttpClientDownloader httpClientDownloader = proxyDownloader("https://tj.lianjia.com/ershoufang");
+		ConfigUitl.setWCJLink(erShouFangManager.getLianjiedz("0"));
+		HttpClientDownloader httpClientDownloader = proxyDownloader("https://tj.lianjia.com/ershoufang");
 		OOSpider.create(new LianJiaSpider(csdm))
-		//.setDownloader(httpClientDownloader)
+		.setDownloader(httpClientDownloader)
 		//--------使用代理池--end-------
 		.addUrl("https://"+csdm+".lianjia.com/ershoufang/"+qydm+"/pg1")
 		.addPipeline(lianjianPipeline)
@@ -83,7 +85,7 @@ public class CrawlManagerImpl implements CrawlManager {
 	@Override
 	public void houseCrawlCJ(String csdm,String qydm) {
 	     
-		ConfigUitl.setLink(erShouFangManager.getLianjiedz());
+		ConfigUitl.setCJLink(erShouFangManager.getLianjiedz("1"));
 		//HttpClientDownloader httpClientDownloader = proxyDownloader("https://tj.lianjia.com/chengjiao");
 		OOSpider.create(lianJiaCJSpider)
 		//.setDownloader(httpClientDownloader)
@@ -108,12 +110,12 @@ public class CrawlManagerImpl implements CrawlManager {
 
 	@Override
 	public void proxyIPCrawl() {
-		/*HttpClientDownloader httpClientDownloader = proxyDownloader("http://www.xicidaili.com");
+		HttpClientDownloader httpClientDownloader = proxyDownloader("http://www.xicidaili.com");
 		OOSpider.create(new ProxyIPSpider())
 		.setDownloader(httpClientDownloader)
 		.addUrl("http://www.xicidaili.com/wn/").addPipeline(proxyIPPipeline)
 		.thread(1)
-		.run();*/
+		.run();
 	}
 
 	@Override

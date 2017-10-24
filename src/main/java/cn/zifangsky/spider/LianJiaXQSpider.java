@@ -43,8 +43,6 @@ public class LianJiaXQSpider implements PageProcessor {
 	
 	@Override
     public void process(Page page) {
-		List<String> urlList = ConfigUitl.getLink();
-		System.out.println("已有链接个数："+urlList.size());
         String url =  page.getUrl().toString();
         Pattern pattern1 = Pattern.compile(URI+"/xiaoqu/[a-z]+/pg(\\d*)?");
         Matcher matcher1 = pattern1.matcher(url);

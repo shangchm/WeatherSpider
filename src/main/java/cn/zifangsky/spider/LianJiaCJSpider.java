@@ -19,7 +19,6 @@ import cn.zifangsky.model.LianjiaFangwuxx;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.processor.PageProcessor;
-import us.codecraft.webmagic.selector.JsonPathSelector;
 
 @Component("lianJiaCJSpider")
 public class LianJiaCJSpider implements PageProcessor {
@@ -32,7 +31,7 @@ public class LianJiaCJSpider implements PageProcessor {
 	
 	private  String URI = "https://tj.lianjia.com";;
 	
-	private Set<String> set = new HashSet<String>();
+	//private Set<String> set = new HashSet<String>();
 	
 	
 	@Override
@@ -47,8 +46,7 @@ public class LianJiaCJSpider implements PageProcessor {
 	
 	@Override
     public void process(Page page) {
-		List<String> urlList1 = ConfigUitl.getLink();
-		set.addAll(urlList1);
+		Set<String> set = ConfigUitl.getCJLink();
 		System.out.println("已有链接个数："+set.size());
         String url =  page.getUrl().toString();
         Pattern pattern1 = Pattern.compile(URI+"/chengjiao/[a-z]+/pg(\\d*)?");
@@ -67,7 +65,7 @@ public class LianJiaCJSpider implements PageProcessor {
             List<String> housePageUrls = page.getHtml().xpath("//li/a[@class='img']/@href").all();
             
             if(housePageUrls != null && housePageUrls.size() > 0){
-                //将当前列表页的所有房屋页面添加进去
+                //将当前列表页的所有房屋详情页面添加进去
                  
                  List<String> list = new ArrayList<String>();
                  for (String purl : housePageUrls) {

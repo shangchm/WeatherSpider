@@ -49,8 +49,8 @@ public class WeatherUpdateJob extends QuartzJobBean{
 		List<String> list = ConfigUitl.getRegion();
 		if(list != null && list.size() > 0){
 			for(String station : list){
-				crawlManager.houseCrawlCJ("tj", station);
-				//crawlManager.houseCrawl("tj", station);
+				//crawlManager.houseCrawlCJ("tj", station);
+				crawlManager.houseCrawl("tj", station);
 			}
 			
 		}

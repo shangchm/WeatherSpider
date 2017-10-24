@@ -20,7 +20,7 @@ public interface LJFangManager {
 
     int updateByPrimaryKey(LianjiaFangwuxx record);
     
-    List<String> getLianjiedz();
+    List<String> getLianjiedz(String flag);
     
     void updateDaikanxx(List<LianjiaDaikanfw>  daikanList);
     

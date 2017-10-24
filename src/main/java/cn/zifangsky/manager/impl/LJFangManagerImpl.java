@@ -57,9 +57,9 @@ public class LJFangManagerImpl implements LJFangManager {
 	}
 
 	@Override
-	public List<String> getLianjiedz() {
+	public List<String> getLianjiedz(String flag) {
 		List<String> dzlist = new ArrayList<String>();
-		List<LianjiaFangwuxx> fwxxList = fangwuxx.getLianjiedz();
+		List<LianjiaFangwuxx> fwxxList = fangwuxx.getLianjiedz(flag);
 		for (LianjiaFangwuxx lianjiaFangwuxx : fwxxList) {
 			dzlist.add(lianjiaFangwuxx.getLianjiedz());
 		}

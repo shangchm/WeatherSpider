@@ -22,7 +22,7 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.JsonPathSelector;
 public class LianJiaSpider implements PageProcessor {
 	
-	private Site site = Site.me().setTimeOut(20000).setRetryTimes(3)
+	private Site site = Site.me().setTimeOut(30000).setRetryTimes(5)
 			.setSleepTime(8000).setCharset("UTF-8");
 	
 	private  String URI;
@@ -46,7 +46,8 @@ public class LianJiaSpider implements PageProcessor {
 	
 	@Override
     public void process(Page page) {
-				
+		Set<String> set = ConfigUitl.getWCJLink();
+		System.out.println("已有链接个数："+set.size());
         String url =  page.getUrl().toString();
         Pattern pattern1 = Pattern.compile(URI+"/ershoufang/[a-z]+/pg(\\d*)?");
         Matcher matcher1 = pattern1.matcher(url);
@@ -58,14 +59,20 @@ public class LianJiaSpider implements PageProcessor {
         Matcher matcher3 = pattern3.matcher(url);
         
         //列表页面
-        if(matcher1.find()){
+        if(matcher1.find()||matcher2.find()){
             //详情页URL集合
             List<String> housePageUrls = page.getHtml().xpath("//li[@class='clear']/a/@href").all();
             
             if(housePageUrls != null && housePageUrls.size() > 0){
-                //将当前列表页的所有房屋页面添加进去
-               
-            	 page.addTargetRequests(housePageUrls);
+                //将当前列表页的所有房屋详情页面添加进去
+            	   List<String> list = new ArrayList<String>();
+                   for (String purl : housePageUrls) {
+                  	 if(!set.contains(purl)){
+   					   list.add(purl);
+   					   set.add(purl);
+                  	 }
+   				}
+                   page.addTargetRequests(list);
                
             }
             
@@ -95,7 +102,7 @@ public class LianJiaSpider implements PageProcessor {
 					for (int i = 1; i <= size; i++) {
 						listUrls.add(URI + pageurl.replace("{page}", String.valueOf(i)));
 					}
-					System.out.println(listUrls);
+					System.out.println("新增翻页信息："+listUrls);
 					page.addTargetRequests(listUrls);
 				}
             } 

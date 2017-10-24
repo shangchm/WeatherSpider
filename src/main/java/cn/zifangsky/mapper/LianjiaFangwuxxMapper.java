@@ -17,5 +17,5 @@ public interface LianjiaFangwuxxMapper {
 
     int updateByPrimaryKey(LianjiaFangwuxx record);
     
-    List<LianjiaFangwuxx> getLianjiedz();
+    List<LianjiaFangwuxx> getLianjiedz(String flag);
 }
