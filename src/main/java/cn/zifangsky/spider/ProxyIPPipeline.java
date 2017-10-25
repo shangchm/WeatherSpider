@@ -4,13 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import cn.zifangsky.activemq.producer.CheckIPSender;
+import cn.zifangsky.manager.ProxyIpManager;
 import cn.zifangsky.model.ProxyIp;
-import cn.zifangsky.model.bo.ProxyIpBO;
-import cn.zifangsky.model.bo.ProxyIpBO.CheckIPType;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
@@ -23,20 +20,24 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 @Component("proxyIPPipeline")
 public class ProxyIPPipeline implements Pipeline {
 	
-	@Value("${activemq.queue.checkIP}")
+	/*@Value("${activemq.queue.checkIP}")
 	private String checkIPQueueName;
 	
 	@Resource(name="checkIPSender")
-	private CheckIPSender checkIPSender;
+	private CheckIPSender checkIPSender;*/
 	
+	@Resource(name="proxyIpManager")
+	private ProxyIpManager proxyIpManager;
 	/**
 	 * 保存数据
 	 */
 	@Override
 	public void process(ResultItems resultItems, Task task) {
 		List<ProxyIp> list = resultItems.get("result");
-		
-		if(list != null && list.size() > 0){
+		if (list != null && list.size() > 0) {
+			proxyIpManager.insertIPList(list);
+		}
+		/*if(list != null && list.size() > 0){
 			for(ProxyIp proxyIp : list){
 				ProxyIpBO proxyIpBO = new ProxyIpBO();
 				proxyIpBO.setId(proxyIp.getId());
@@ -49,9 +50,9 @@ public class ProxyIPPipeline implements Pipeline {
 				proxyIpBO.setCheckType(CheckIPType.ADD);
 				
 				//检测任务添加到队列中
-				checkIPSender.send(checkIPQueueName, proxyIpBO);
+				//checkIPSender.send(checkIPQueueName, proxyIpBO);
 			}
-		}
+		}*/
 
 	}
 

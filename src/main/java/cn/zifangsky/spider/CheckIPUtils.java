@@ -42,6 +42,7 @@ public class CheckIPUtils {
 	public static boolean checkLJValidIP(String ip,Integer port,String testurl){
 		
 		HttpURLConnection connection = null;
+		 int code = 0;
 		try {
 			URL url = new URL(testurl);
 			//url = new URL("https://tj.lianjia.com/ershoufang");
@@ -49,16 +50,18 @@ public class CheckIPUtils {
 			InetSocketAddress proxyAddr = new InetSocketAddress(ip, port);
 			Proxy proxy = new Proxy(Proxy.Type.HTTP, proxyAddr);
 			connection = (HttpURLConnection) url.openConnection(proxy);
-			connection.setReadTimeout(2000);
-			connection.setConnectTimeout(2000);
+			connection.setReadTimeout(3000);
+			connection.setConnectTimeout(3000);
 			connection.setRequestMethod("GET");
-
-			if(connection.getResponseCode() == 200){
+            code = connection.getResponseCode() ;
+			if(code== 200){
 				connection.disconnect();
 				return true;
 			}
 			
 		} catch (Exception e) {
+			//e.printStackTrace();
+			//System.out.println(ip+":"+port+ " return "+code);
 			connection.disconnect();
 			return false;
 		}

@@ -50,4 +50,6 @@ public interface ProxyIpManager {
 	 * @return
 	 */
     public ProxyIp selectRandomIP();
+    
+    public void insertIPList(List<ProxyIp> iplist);
 }

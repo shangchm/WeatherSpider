@@ -25,6 +25,8 @@ public class ProxyIPSpider2 implements PageProcessor {
 
 	@Override
 	public void process(Page page) {
+		
+		String s = page.getHtml().get();
 		List<String> ipList = page.getHtml().xpath("//table[@class='table table-bordered table-striped']/tbody/tr").all();
 		List<ProxyIp> result = new ArrayList<>();
 	    System.out.println("本页获取ip数量："+ipList.size());

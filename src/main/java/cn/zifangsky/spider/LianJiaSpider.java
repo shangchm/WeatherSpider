@@ -22,8 +22,8 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.JsonPathSelector;
 public class LianJiaSpider implements PageProcessor {
 	
-	private Site site = Site.me().setTimeOut(30000).setRetryTimes(5)
-			.setSleepTime(8000).setCharset("UTF-8");
+	private Site site = Site.me().setTimeOut(6000).setRetryTimes(5)
+			.setSleepTime(10000).setCharset("UTF-8");
 	
 	private  String URI;
 	
@@ -131,8 +131,8 @@ public class LianJiaSpider implements PageProcessor {
             String yueyuecs = page.getHtml().xpath("//span[@id=cartCount]/text()").toString();
             
             fw.setFangwubh(fangwubh);
-            fw.setDanjia(Integer.parseInt(danjia));
-            fw.setZongjia(Integer.parseInt(zongjia));
+            fw.setDanjia((int)Math.round(Double.parseDouble(danjia)));
+            fw.setZongjia((int)Math.round(Double.parseDouble(zongjia)));
             fw.setXiaoqumc(xiaoqumc);
             fw.setSuozaics(CSDM);
             fw.setSuozaiq(suozaiq);

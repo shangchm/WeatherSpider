@@ -85,4 +85,14 @@ public class ProxyIpManagerImpl implements ProxyIpManager {
 		
 	}
 
+	@Override
+	public void insertIPList(List<ProxyIp> iplist) {
+		for (ProxyIp proxyIp : iplist) {
+			proxyIpMapper.insertSelective(proxyIp);
+		}
+		
+	}
+	
+	
+
 }
