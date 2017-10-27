@@ -85,7 +85,7 @@ public class LianJiaCJSpider implements PageProcessor {
             	//各区的链接
             	List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div[2]/a/@href").all();
                 
-                if(PageListUrls != null && PageListUrls.size() > 0){
+               /* if(PageListUrls != null && PageListUrls.size() > 0){
                     //将当前列表页的所有房屋页面添加进去
                  
                     List<String> list = new ArrayList<String>();
@@ -93,20 +93,21 @@ public class LianJiaCJSpider implements PageProcessor {
     					list.add(URI+purl);
     				}
                     page.addTargetRequests(list);
-                 }
+                 }*/
             	
             	
             	
             	//翻页连接
-				if (!ConfigUitl.linkContains(url)) {
+				//if (!ConfigUitl.linkContains(url)) {
 					int size = json.getIntValue("totalPage");
 					List<String> listUrls = new ArrayList<String>();
-					for (int i = 1; i <= size; i++) {
+					size = size>2?2:size;//只更新前二页
+					for (int i = 2; i <= size; i++) {
 						listUrls.add(URI + pageurl.replace("{page}", String.valueOf(i)));
 					}
 					System.out.println(listUrls);
 					page.addTargetRequests(listUrls);
-				}
+				//}
             } 
         }else if(matcher3.find()){  //房屋页面   
         	
