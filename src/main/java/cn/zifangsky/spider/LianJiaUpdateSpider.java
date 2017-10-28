@@ -23,7 +23,7 @@ import us.codecraft.webmagic.selector.JsonPathSelector;
 public class LianJiaUpdateSpider implements PageProcessor {
 	
 	private Site site = Site.me().setTimeOut(6000).setRetryTimes(5)
-			.setSleepTime(10000).setCharset("UTF-8");
+			.setSleepTime(15000).setCharset("UTF-8");
 	
 	private  String URI;
 	

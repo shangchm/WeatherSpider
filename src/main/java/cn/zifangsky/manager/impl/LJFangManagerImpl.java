@@ -13,6 +13,7 @@ import cn.zifangsky.mapper.LianjiaTiaojiafwMapper;
 import cn.zifangsky.model.LianjiaDaikanfw;
 import cn.zifangsky.model.LianjiaFangwuxx;
 import cn.zifangsky.model.LianjiaTiaojiafw;
+import cn.zifangsky.spider.ConfigUitl;
 
 @Service("erShouFangManager")
 public class LJFangManagerImpl implements LJFangManager {
@@ -59,7 +60,12 @@ public class LJFangManagerImpl implements LJFangManager {
 	@Override
 	public List<String> getLianjiedz(String flag) {
 		List<String> dzlist = new ArrayList<String>();
-		List<LianjiaFangwuxx> fwxxList = fangwuxx.getLianjiedz(flag);
+		List<LianjiaFangwuxx> fwxxList = null;
+		if("1".equals(flag)){
+		    fwxxList = fangwuxx.getLianjiedz(flag);
+		}else{
+			fwxxList = fangwuxx.getLianjieUpdatedz(ConfigUitl.getDate());
+		}
 		for (LianjiaFangwuxx lianjiaFangwuxx : fwxxList) {
 			dzlist.add(lianjiaFangwuxx.getLianjiedz());
 		}

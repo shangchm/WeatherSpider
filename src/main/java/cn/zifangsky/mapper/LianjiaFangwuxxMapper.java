@@ -18,4 +18,6 @@ public interface LianjiaFangwuxxMapper {
     int updateByPrimaryKey(LianjiaFangwuxx record);
     
     List<LianjiaFangwuxx> getLianjiedz(String flag);
+    
+    List<LianjiaFangwuxx> getLianjieUpdatedz(String datetime);
 }
