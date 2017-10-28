@@ -56,15 +56,19 @@ public class LianjianPipeline implements Pipeline {
 					tiaojiaxx.setDangjia(fangwuxx.getDanjia());
 				    tiaojiaxx.setTiaojiasj(ConfigUitl.getDate());
 				    tiaojiaxx.setTiaojiaje(newfj-oldfj);
+				   
 				    if(newfj-oldfj<0){
 				      tiaojiaxx.setTiaojialx("down");//降价
 				    }else{
 				      tiaojiaxx.setTiaojialx("up");//涨价
 				    }
+				    System.out.println("调价记录插入成功：调价"+(newfj-oldfj)+" 万");
+				    erShouFangManager.insertTiaojiaxx(tiaojiaxx);
 				}
 					
-					
+			  
 			}
+			
 			erShouFangManager.updateDaikanxx(dkfwList);
 		}
 	}
