@@ -52,7 +52,7 @@ public class LianJiaSpider implements PageProcessor {
         Pattern pattern1 = Pattern.compile(URI+"/ershoufang/[a-z]+/pg(\\d*)?");
         Matcher matcher1 = pattern1.matcher(url);
         
-        Pattern pattern2 = Pattern.compile(URI+"/ershoufang/[a-z]+/$");
+        Pattern pattern2 = Pattern.compile(URI+"/ershoufang/[a-z]+/co32/$");
         Matcher matcher2 = pattern2.matcher(url);
         
         Pattern pattern3 = Pattern.compile(URI+"/ershoufang/\\w+.html$");
@@ -72,7 +72,7 @@ public class LianJiaSpider implements PageProcessor {
    					   set.add(purl);
                   	 }
    				}
-                   page.addTargetRequests(list);
+                page.addTargetRequests(list);
                
             }
             
@@ -81,6 +81,7 @@ public class LianJiaSpider implements PageProcessor {
             String pageurl =  page.getHtml().xpath("//div[@class='page-box house-lst-page-box']/@page-url").toString();
             JSONObject json = JSON.parseObject(pages);
             if(json!=null&&"1".equals(json.getInteger("curPage").toString())){//避免重复添加，只在第一次的时候添加
+            	
             	//各区的链接
             	List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div[2]/a/@href").all();
                 
@@ -99,7 +100,8 @@ public class LianJiaSpider implements PageProcessor {
 				if (!ConfigUitl.linkContains(url)) {
 					int size = json.getIntValue("totalPage");
 					List<String> listUrls = new ArrayList<String>();
-					for (int i = 1; i <= size; i++) {
+					size = size>2?2:size;//只更新前二页
+					for (int i = 2; i <= size; i++) {
 						listUrls.add(URI + pageurl.replace("{page}", String.valueOf(i)));
 					}
 					System.out.println("新增翻页信息："+listUrls);
@@ -286,7 +288,7 @@ public class LianJiaSpider implements PageProcessor {
 	
 	public static void main(String[] args) {
 		
-		  String url = "https://tj.lianjia.com/ershoufang/heping/";
+		  String url = "https://tj.lianjia.com/ershoufang/heping/pg1co32";
 		  
 		    Pattern pattern1 = Pattern.compile("https://tj.lianjia.com/ershoufang/[a-z]+/pg(\\d*)?");
 	        Matcher matcher1 = pattern1.matcher(url);
