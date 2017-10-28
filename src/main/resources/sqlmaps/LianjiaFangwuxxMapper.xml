@@ -493,7 +493,11 @@
     where FANGWUBH = #{fangwubh,jdbcType=VARCHAR}
   </update>
   
-   <select id="getLianjiedz" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" />  from lianjia_fangwuxx where shifoucj='1'
+   <select id="getLianjiedz" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select <include refid="Base_Column_List" />  from lianjia_fangwuxx where shifoucj=#{flag,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getLianjieUpdatedz" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select <include refid="Base_Column_List" />  from lianjia_fangwuxx where shifoucj='0' and caozuosj not like concat('%',#{datetime,jdbcType=VARCHAR},'%');
 	</select>
 </mapper>
