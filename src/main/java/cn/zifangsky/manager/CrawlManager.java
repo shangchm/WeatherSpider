@@ -19,6 +19,13 @@ public interface CrawlManager {
 	 * 房屋爬虫
 	 * @param station 城区
 	 */
+	public void houseCrawlUpdate(String csdm);
+	
+	
+	/**
+	 * 房屋爬虫
+	 * @param station 城区
+	 */
 	public void houseCrawlCJ(String csdm,String qydm);
 	
 	/**
