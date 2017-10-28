@@ -74,7 +74,28 @@
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table> -->
-		<table tableName="proxyip" domainObjectName="ProxyIp"
+		<!-- 
+		<table tableName="lianjia_fangwuxx" domainObjectName="LianjiaFangwuxx"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="lianjia_daikanfw" domainObjectName="LianjiaDaikanfw"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="lianjia_tiaojiafw" domainObjectName="LianjiaTiaojiafw"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table> -->
+		<!-- <table tableName="lianjia_xiaoquxx" domainObjectName="LianjiaXiaoquxx"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table> -->
+		<table tableName="lianjia_daikanfw" domainObjectName="LianjiaDaikanfw"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
