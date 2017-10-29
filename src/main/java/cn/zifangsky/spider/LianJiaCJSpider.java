@@ -83,7 +83,7 @@ public class LianJiaCJSpider implements PageProcessor {
             JSONObject json = JSON.parseObject(pages);
             if(json!=null&&"1".equals(json.getInteger("curPage").toString())){//避免重复添加，只在第一次的时候添加
             	//各区的链接
-            	List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div[2]/a/@href").all();
+            	//List<String> PageListUrls = page.getHtml().xpath("//div[@data-role='ershoufang']/div[2]/a/@href").all();
                 
                /* if(PageListUrls != null && PageListUrls.size() > 0){
                     //将当前列表页的所有房屋页面添加进去
