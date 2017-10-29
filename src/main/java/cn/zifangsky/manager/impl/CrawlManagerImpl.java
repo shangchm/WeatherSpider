@@ -83,7 +83,7 @@ public class CrawlManagerImpl implements CrawlManager {
 	
 	@Override
 	public void houseCrawlUpdate(String csdm) {
-		ConfigUitl.setWCJLink(erShouFangManager.getLianjiedz("0"));
+		ConfigUitl.setWCJLink(erShouFangManager.getLianjiedz(ConfigUitl.getDate()));
 		//HttpClientDownloader httpClientDownloader = proxyDownloader("https://tj.lianjia.com/ershoufang");
 		OOSpider.create(new LianJiaUpdateSpider(csdm))
 		//.setDownloader(httpClientDownloader)

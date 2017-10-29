@@ -43,17 +43,10 @@ public class WeatherUpdateJob extends QuartzJobBean{
 	protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 		Date current = new Date();
         Format format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println("开始执行成交房屋信息采集任务，Date：" + format.format(current));
-		logger.debug("开始执行成交房屋信息采集任务，Date： " + format.format(current));
+        System.out.println("开始执行房屋更新信息采集任务，update Date：" + format.format(current));
+		logger.debug("开始执行房屋更新信息采集任务，update Date： " + format.format(current));
+		crawlManager.houseCrawlUpdate("tj");
 		
-		List<String> list = ConfigUitl.getRegion();
-		if(list != null && list.size() > 0){
-			for(String station : list){
-				crawlManager.houseCrawl("tj", station);
-				//crawlManager.houseCrawlCJ("tj", station);
-			}
-			
-		}
 	}
 
 }

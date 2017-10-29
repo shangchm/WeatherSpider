@@ -63,8 +63,10 @@ public class LJFangManagerImpl implements LJFangManager {
 		List<LianjiaFangwuxx> fwxxList = null;
 		if("1".equals(flag)){
 		    fwxxList = fangwuxx.getLianjiedz(flag);
+		}else if("0".equals(flag)){
+			 fwxxList = fangwuxx.getLianjiedz(flag);
 		}else{
-			fwxxList = fangwuxx.getLianjieUpdatedz(ConfigUitl.getDate());
+			 fwxxList = fangwuxx.getLianjieUpdatedz(flag);
 		}
 		for (LianjiaFangwuxx lianjiaFangwuxx : fwxxList) {
 			dzlist.add(lianjiaFangwuxx.getLianjiedz());
