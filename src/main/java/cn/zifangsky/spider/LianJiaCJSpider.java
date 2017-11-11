@@ -102,7 +102,7 @@ public class LianJiaCJSpider implements PageProcessor {
 					int size = json.getIntValue("totalPage");
 					List<String> listUrls = new ArrayList<String>();
 					size = size>2?2:size;//只更新前二页
-					for (int i = 2; i <= size; i++) {
+					for (int i = 1; i <= size; i++) {
 						listUrls.add(URI + pageurl.replace("{page}", String.valueOf(i)));
 					}
 					System.out.println(listUrls);

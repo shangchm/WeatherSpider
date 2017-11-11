@@ -43,7 +43,7 @@ public class LianjianPipeline implements Pipeline {
 				System.out.println("新增记录成功："+fangwuxx.getLianjiedz());
 			} else {
 				fangwuxx.setFangwubh(oldfangwuxx.getFangwubh());
-				fangwuxx.setShifouxz("0");
+				//fangwuxx.setShifouxz("0");
 				erShouFangManager.updateByPrimaryKeySelective(fangwuxx);
 				System.out.println("更新记录成功："+fangwuxx.getLianjiedz());
 				int oldfj = oldfangwuxx.getZongjia();
