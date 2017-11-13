@@ -500,4 +500,31 @@
 	<select id="getLianjieUpdatedz" resultMap="BaseResultMap" parameterType="java.lang.String">
 		select <include refid="Base_Column_List" />  from lianjia_fangwuxx where shifoucj='0' and caozuosj not like concat('%',#{datetime,jdbcType=VARCHAR},'%');
 	</select>
+	
+	<select id="getUpxx" resultType="java.util.Map" parameterType="java.lang.String">
+		SELECT TIAOJIASJ,COUNT(*) NUM FROM LIANJIA_TIAOJIAFW  WHERE TIAOJIALX='up' AND TIAOJIASJ>=#{riqi,jdbcType=VARCHAR} GROUP BY TIAOJIASJ DESC;
+	</select>
+	<select id="getDownxx" resultType="java.util.Map" parameterType="java.lang.String">
+		SELECT TIAOJIASJ,COUNT(*) NUM FROM LIANJIA_TIAOJIAFW  WHERE TIAOJIALX='down' AND TIAOJIASJ>=#{riqi,jdbcType=VARCHAR} GROUP BY TIAOJIASJ DESC;
+	</select>
+	
+	<select id="getDaiKanxx" resultType="java.util.Map" parameterType="java.lang.String">
+		SELECT DAIKANSJ,COUNT(-1) PERSON,SUM(DAIKANCS)  DAIKAINUM FROM LIANJIA_DAIKANFW  WHERE DAIKANSJ>=#{riqi,jdbcType=VARCHAR} GROUP BY DAIKANSJ DESC;
+	</select>
+	
+	<select id="getChengJiaoxx" resultType="java.util.Map" parameterType="java.lang.String">
+		SELECT CHENGJIAOSJ ,COUNT(-1) NUM FROM LIANJIA_FANGWUXX WHERE  SHIFOUCJ='1'  AND CHENGJIAOSJ>=#{riqi,jdbcType=VARCHAR}  GROUP BY CHENGJIAOSJ DESC;
+	</select>
+	
+	<select id="getGuaPaixx" resultType="java.util.Map" parameterType="java.lang.String">
+		SELECT GUAPAISJ,COUNT(*) NUM FROM LIANJIA_FANGWUXX WHERE GUAPAISJ>=#{riqi,jdbcType=VARCHAR} GROUP BY GUAPAISJ ORDER BY GUAPAISJ DESC;
+	</select>
+	
+	<select id="getZongTixx" resultType="java.util.Map" parameterType="java.util.Map">
+		select ztb.suozaiq ,ztb.down,ztb.downzj,ztb.up,ztb.upzj,ztb.cs,coalesce(xzb.xinzheng,0) xznum,coalesce(cjb.chengjiao,0) cjnum from (select suozaiq,sum(case when tiaojialx='down' then 1 else 0 end) down,sum(case when tiaojialx='down' then TIAOJIAJE else 0 end) downzj,sum(case when tiaojialx='up' then 1 else 0 end) up,sum(case when tiaojialx='up' then TIAOJIAJE else 0 end) upzj,sum(kanfangcs) cs from lianjia_tiaojiafw a,lianjia_fangwuxx  b where a.FANGWUBH=b.FANGWUBH   and TIAOJIASJ=#{tjsj,jdbcType=VARCHAR}   group by suozaiq order by cs desc ) ztb
+LEFT JOIN (select suozaiq ,count(*) xinzheng from lianjia_fangwuxx where GUAPAISJ=#{gpsj,jdbcType=VARCHAR} group by suozaiq) xzb on ztb.suozaiq=xzb.suozaiq
+LEFT JOIN (select suozaiq,count(*) chengjiao from lianjia_fangwuxx where CHENGJIAOSJ=#{cjsj,jdbcType=VARCHAR} and SHIFOUCJ='1' group by suozaiq) cjb on ztb.suozaiq=cjb.suozaiq;
+	</select>
+	
+	
 </mapper>
