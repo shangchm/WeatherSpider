@@ -1,7 +1,9 @@
 package cn.zifangsky.manager.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,6 +96,27 @@ public class LJFangManagerImpl implements LJFangManager {
 	public void insertTiaojiaxx(LianjiaTiaojiafw tiaojiaxx) {
 		System.out.println("新增调价记录成功："+tiaojiaxx.getFangwubh()+" "+tiaojiaxx.getTiaojialx());
 		tiaojiaofw.insertSelective(tiaojiaxx);
+	}
+
+	@Override
+	public String getRibao() {
+		
+		List<Map<String,Object>> zjxx = fangwuxx.getUpxx(ConfigUitl.getBeforDate(15));
+		
+		List<Map<String,Object>> jjxx = fangwuxx.getDownxx(ConfigUitl.getBeforDate(15));
+		
+		List<Map<String,Object>> cjxx = fangwuxx.getChengJiaoxx(ConfigUitl.getBeforDate(30));
+		
+		List<Map<String,Object>> dkxx = fangwuxx.getDaiKanxx(ConfigUitl.getBeforDate(15));
+		
+		List<Map<String,Object>> gpxx = fangwuxx.getGuaPaixx(ConfigUitl.getDate());
+		Map map = new HashMap();
+		map.put("tjsj", ConfigUitl.getDate());
+		map.put("gpsj", ConfigUitl.getBeforDate(1));
+		map.put("cjsj", ConfigUitl.getBeforDate(15));
+		List<Map<String,Object>> ztxx = fangwuxx.getZongTixx(map);
+		
+		return null;
 	}
 
 }

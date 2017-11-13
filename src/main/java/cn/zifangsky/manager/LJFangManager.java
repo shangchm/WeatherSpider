@@ -26,4 +26,6 @@ public interface LJFangManager {
     
     void insertTiaojiaxx(LianjiaTiaojiafw tiaojiaxx);
     
+    String getRibao();
+    
 }
