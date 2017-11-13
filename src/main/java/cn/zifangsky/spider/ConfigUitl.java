@@ -1,11 +1,15 @@
 package cn.zifangsky.spider;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
+import org.apache.activemq.console.Main;
 
 public class ConfigUitl {
 	
@@ -65,6 +69,21 @@ public class ConfigUitl {
 	public static String getDate(){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		return sdf.format(new Date());
+	}
+	
+	public static String getBeforDate(int datenum){
+		SimpleDateFormat dft = new SimpleDateFormat("yyyyMMdd");
+		Date beginDate = new Date();
+		Calendar date = Calendar.getInstance();
+		date.setTime(beginDate);
+		date.set(Calendar.DATE, date.get(Calendar.DATE) - datenum);
+		return dft.format(date.getTime());
+	}
+	
+	
+	public static void main(String[] args) {
+		String s = getBeforDate(7);
+		System.out.println(s);
 	}
 	
 
