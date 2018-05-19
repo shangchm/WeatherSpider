@@ -1,6 +1,5 @@
 package cn.zifangsky.spider;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,16 +8,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.activemq.console.Main;
-
 public class ConfigUitl {
 	
 	private static Set<String> cjSet = new TreeSet<String>();
 	
 	private static Set<String> wcjSet =  new TreeSet<String>();
 	
-	public static List<String> getRegion(){
+	public static List<String> getRegion(String csmc){
 		List<String> list = new ArrayList<String>();
+		if("tj".equals(csmc)){
 		list.add("heping");
 		list.add("kaifaqutj");
 		list.add("nankai");
@@ -31,13 +29,34 @@ public class ConfigUitl {
 		list.add("hebei");
 		list.add("hedong");
 		list.add("hongqiao");
+		}else if("bj".equals(csmc)){
+		list.add("dongcheng");
+		list.add("xicheng");
+		list.add("haidian");
+		list.add("fengtai");
+		list.add("shijingshan");
+		list.add("tongzhou");
+		list.add("changping");
+		list.add("daxing");
+		list.add("yizhuangkaifaqu");
+		list.add("shunyi");
+		list.add("fangshan");
+		list.add("mentougou");
+		
+		list.add("pinggu");
+		list.add("huairou");
+		list.add("miyun");
+		list.add("yanqing");
+		list.add("yanjiao");
+		list.add("xianghe");
+		}
 		
 		return list;
 	}
 	
-	public static boolean linkContains(String url){
+	public static boolean linkContains(String url,String csmc){
 		boolean ok = false;
-		List<String> list = getRegion();
+		List<String> list = getRegion(csmc);
 		for (String s : list) {
 			if(url.indexOf(s)!=-1){
 				ok =true;

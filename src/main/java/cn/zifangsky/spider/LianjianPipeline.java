@@ -68,7 +68,7 @@ public class LianjianPipeline implements Pipeline {
 					
 			  
 			}
-			
+			if(dkfwList!=null)
 			erShouFangManager.updateDaikanxx(dkfwList);
 		}
 	}

@@ -97,7 +97,7 @@ public class LianJiaSpider implements PageProcessor {
             	
             	
 				// 翻页连接
-				if (!ConfigUitl.linkContains(url)) {
+				if (!ConfigUitl.linkContains(url,CSDM)) {
 					int size = json.getIntValue("totalPage");
 					List<String> listUrls = new ArrayList<String>();
 					size = size>2?2:size;//只更新前二页
@@ -110,7 +110,6 @@ public class LianJiaSpider implements PageProcessor {
             } 
         }else if(matcher3.find()){  //房屋页面   
         	LianjiaFangwuxx fw = new LianjiaFangwuxx();
-        	
         	
         	
         	//编号
@@ -288,7 +287,7 @@ public class LianJiaSpider implements PageProcessor {
 	
 	public static void main(String[] args) {
 		
-		  String url = "https://tj.lianjia.com/ershoufang/heping/pg1co32";
+		  String url = "https://tj.lianjia.com/ershoufang/heping/pg2co32/";
 		  
 		    Pattern pattern1 = Pattern.compile("https://tj.lianjia.com/ershoufang/[a-z]+/pg(\\d*)?");
 	        Matcher matcher1 = pattern1.matcher(url);

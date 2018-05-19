@@ -24,12 +24,15 @@ public class LianJiaXQSpider implements PageProcessor {
 	private Site site = Site.me().setTimeOut(30000).setRetryTimes(3)
 			.setSleepTime(10000).setCharset("UTF-8");
 	
+	private String CSDM;
+	
+	private  String URI;
 	
 	
-	private  String URI = "https://tj.lianjia.com";;
-	
-	
-	
+	public LianJiaXQSpider(){
+		CSDM = "tj";
+		URI = "https://"+CSDM+".lianjia.com";
+	}
 	
 	@Override
 	public Site getSite() {
@@ -78,7 +81,7 @@ public class LianJiaXQSpider implements PageProcessor {
             	 LianjiaXiaoquxx xq = new LianjiaXiaoquxx();
             	 xq.setXiaoqubm(xiaoqubm.get(i));
             	 xq.setXiaoqumc(xiaoqumc.get(i));
-            	 xq.setSuozaics("tj");
+            	 xq.setSuozaics(CSDM);
             	 xq.setSuozaicq(suozaicq.get(i));
             	 xq.setSuozaisq(suozaisq.get(i));
             	 if(zaishouts.get(i)!=null)
@@ -130,7 +133,7 @@ public class LianJiaXQSpider implements PageProcessor {
             	
             	
             	//翻页连接
-				if (!ConfigUitl.linkContains(url)) {
+				if (!ConfigUitl.linkContains(url,CSDM)) {
 					int size = json.getIntValue("totalPage");
 					List<String> listUrls = new ArrayList<String>();
 					for (int i = 1; i <= size; i++) {

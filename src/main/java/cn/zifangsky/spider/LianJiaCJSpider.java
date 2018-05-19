@@ -109,12 +109,19 @@ public class LianJiaCJSpider implements PageProcessor {
 					page.addTargetRequests(listUrls);
 				//}
             } 
-        }else if(matcher3.find()){  //房屋页面   
-        	
-        	
+        }else if(matcher3.find()){  
+        	cjYemian(page, url);
+        }    
+    }
+
+
+	private void cjYemian(Page page, String url) {
+		   //房屋页面   
+    
         	//编号
         	String fangwubh = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[1]/text()").toString();
         	
+        	String title = page.getHtml().xpath("//div[@class='house-title']/div[@class='wrapper']/span/text()").toString();
             //挂牌价格
             String zongjia = page.getHtml().xpath("//div[@class='overview']/div[@class='info fr']/div[@class='msg']/span[1]/label/text()").toString();
             //挂牌单价
@@ -274,8 +281,7 @@ public class LianJiaCJSpider implements PageProcessor {
             updatefw.setZongjia(fw.getZongjia());//挂牌总价
             updatefw.setDanjia(fw.getDanjia());
             page.putField("updateFangwuxx", updatefw);  //后面做数据的持久化
-        }    
-    }
+	}
  
 
 	
