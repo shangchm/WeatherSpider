@@ -232,21 +232,21 @@ public class LianJiaSpider implements PageProcessor {
             
            //---------------------------------------交易属性-------transaction-----------------------------------------
             //挂牌时间
-            String guapaisj = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[1]/text()").toString();
+            String guapaisj = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[1]/span[2]/text()").toString();
             //交易权属
-            String jiaoyiqs = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[2]/text()").toString();
+            String jiaoyiqs = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[2]/span[2]/text()").toString();
             //上次交易
-            String shangcijy = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[3]/text()").toString();
+            String shangcijy = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[3]/span[2]/text()").toString();
             //房屋用途
-            String fangwuyt = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[4]/text()").toString();
+            String fangwuyt = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[4]/span[2]/text()").toString();
             //房屋年限
-            String fangwunx = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[5]/text()").toString();
+            String fangwunx = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[5]/span[2]/text()").toString();
             //产权所属
-            String chanquanss = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[6]/text()").toString();
+            String chanquanss = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[6]/span[2]/text()").toString();
             //抵押信息
             String diyaxx = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[7]/span[2]/text()").toString();
             //房本备件
-            String fangbenbj = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[8]/text()").toString();
+            String fangbenbj = page.getHtml().xpath("//div[@class='transaction']/div[@class='content']/ul/li[8]/span[2]/text()").toString();
             
             //交易信息
             if(guapaisj!=null)

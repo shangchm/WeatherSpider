@@ -183,9 +183,9 @@ public class LianJiaCJSpider implements PageProcessor {
             //供暖方式
             String gongnuanfs = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[12]/text()").toString();
             //配备电梯
-            String peibeidt = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[13]/text()").toString();
+            String peibeidt = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[14]/text()").toString();
             //产权年限
-            String chanquannx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[14]/text()").toString();
+            String chanquannx = page.getHtml().xpath("//div[@class='base']/div[@class='content']/ul/li[13]/text()").toString();
             
            //---------------------------------------交易属性-------transaction-----------------------------------------
             //上次交易时间
